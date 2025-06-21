@@ -24,7 +24,7 @@ const App = () => {
     { name: 'contact', ref: contactSectionRef }
   ];
 
-  const phoneRotation = currentSectionIndex * 90;
+  const phoneRotation = currentSectionIndex * 180;
 
   const getCurrentScreenComponent = () => {
     switch (currentSection) {
@@ -115,6 +115,38 @@ const App = () => {
     }
   };
 
+  // Helper to get phone style and orientation class
+  const isHero = currentSection === 'hero';
+  const phoneClass = isHero ? 'phone landscape' : 'phone portrait';
+  const phoneScreenClass = isHero ? 'phone-screen landscape' : 'phone-screen portrait';
+  const screenContentClass = isHero ? 'screen-content landscape' : 'screen-content portrait';
+
+  // Helper to get phone style based on section
+  const getPhoneStyle = () => {
+    if (currentSection === 'hero') {
+      return {
+        transform: 'rotate(0deg) scale(2.2)',
+        width: '560px',
+        height: '280px',
+        transition: 'transform 0.6s cubic-bezier(0.4,0,0.2,1), width 0.6s, height 0.6s',
+      };
+    } else {
+      return {
+        transform: `rotate(${phoneRotation}deg) scale(1.25)`,
+        width: '280px',
+        height: '560px',
+        transition: 'transform 0.6s cubic-bezier(0.4,0,0.2,1), width 0.6s, height 0.6s',
+      };
+    }
+  };
+
+  // Helper to get phone container position class
+  const getPhoneContainerClass = () => {
+    if (currentSection === 'hero') return 'phone-container center';
+    // Odd index: phone left, Even index: phone right (after hero)
+    return currentSectionIndex % 2 === 1 ? 'phone-container left' : 'phone-container right';
+  };
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
@@ -127,16 +159,15 @@ const App = () => {
   return (
     <div className="app">
       {/* Fixed Phone Mockup */}
-      <div className="phone-container">
-        <div className="phone" style={{ transform: `rotate(${phoneRotation}deg)` }}>
-          <div className="phone-screen">
-            <div className="screen-content" key={currentSection}>
+      <div className={getPhoneContainerClass()}>
+        <div className={phoneClass} style={getPhoneStyle()}>
+          <div className={phoneScreenClass}>
+            <div className={screenContentClass} key={currentSection}>
               {getCurrentScreenComponent()}
             </div>
           </div>
         </div>
       </div>
-
       {/* Side Images */}
       <div className="side-images">
         {getCurrentLeftImage() && (
@@ -159,98 +190,22 @@ const App = () => {
 
       {/* Main Content Sections */}
       <main className="content">
-        <section ref={heroSectionRef} className="section hero">
-          <div className="container">
-            <h1 className="hero-title">
-              <span className="gradient-text">Creative</span>
-              <br />Developer
-            </h1>
-            <p className="hero-subtitle">Crafting digital experiences with passion and precision</p>
-            <div className="hero-cta">
-              <button className="btn-primary">View My Work</button>
-              <button className="btn-secondary">Get In Touch</button>
-            </div>
-          </div>
+        <section ref={heroSectionRef} className="section hero" name ="hero">
+          {/* Hero section intentionally left empty; content is now inside the phone */}
         </section>
-
-        <section ref={aboutSectionRef} className="section about">
-          <div className="container">
-            <h2 className="section-title">About Me</h2>
-            <div className="about-content">
-              <div className="about-text">
-                <p>I'm a passionate full-stack developer with 5+ years of experience creating beautiful, functional web applications. I specialize in modern JavaScript frameworks and love bringing creative ideas to life.</p>
-                <div className="skills-preview">
-                  <span className="skill-tag">React</span>
-                  <span className="skill-tag">Vue.js</span>
-                  <span className="skill-tag">Node.js</span>
-                  <span className="skill-tag">TypeScript</span>
+        {/* Render main content sections with phone on left/right and content on the other side */}
+        {sections.slice(1).map((section, idx) => (
+          <section ref={section.ref} className={`section ${section.name}`} key={section.name}>
+            <div className="container split-layout">
+              {((currentSectionIndex % 2 === 1 && currentSectionIndex === idx + 1) || (currentSectionIndex % 2 === 0 && currentSectionIndex !== 0 && currentSectionIndex === idx + 1)) ? null : (
+                <div className="split-content">
+                  {/* Section content here, e.g. AboutScreen, ProjectsScreen, etc. */}
+                  {getCurrentScreenComponent()}
                 </div>
-              </div>
+              )}
             </div>
-          </div>
-        </section>
-
-        <section ref={projectsSectionRef} className="section projects">
-          <div className="container">
-            <h2 className="section-title">Featured Projects</h2>
-            <div className="projects-grid">
-              {projects.map((project) => (
-                <div className="project-card" key={project.id}>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <div className="project-tech">
-                    {project.tech.map((tech) => (
-                      <span key={tech} className="tech-tag">{tech}</span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section ref={skillsSectionRef} className="section skills">
-          <div className="container">
-            <h2 className="section-title">Skills & Expertise</h2>
-            <div className="skills-grid">
-              {skillCategories.map((category) => (
-                <div className="skill-category" key={category.name}>
-                  <h3>{category.name}</h3>
-                  <div className="skill-items">
-                    {category.skills.map((skill) => (
-                      <div key={skill.name} className="skill-item">
-                        <span>{skill.name}</span>
-                        <div className="skill-bar">
-                          <div className="skill-progress" style={{ width: skill.level + '%' }}></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section ref={contactSectionRef} className="section contact">
-          <div className="container">
-            <h2 className="section-title">Let's Work Together</h2>
-            <div className="contact-content">
-              <p>Ready to bring your ideas to life? Let's discuss your next project.</p>
-              <div className="contact-methods">
-                <a href="mailto:hello@example.com" className="contact-link">
-                  📧 hello@example.com
-                </a>
-                <a href="tel:+1234567890" className="contact-link">
-                  📞 +1 (234) 567-890
-                </a>
-                <a href="https://linkedin.com" className="contact-link">
-                  💼 LinkedIn
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+          </section>
+        ))}
       </main>
     </div>
   );

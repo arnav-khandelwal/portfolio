@@ -1,107 +1,109 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+const AVATAR_URL = 'https://avatars.githubusercontent.com/u/10270277?v=4';
+const TYPING_TEXT = 'Arnav Khandelwal';
 
 const HeroScreen = () => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [typingIndex, setTypingIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timeout;
+    if (!isDeleting && typingIndex < TYPING_TEXT.length) {
+      timeout = setTimeout(() => {
+        setDisplayedText((prev) => prev + TYPING_TEXT[typingIndex]);
+        setTypingIndex(typingIndex + 1);
+      }, 120);
+    } else if (!isDeleting && typingIndex === TYPING_TEXT.length) {
+      timeout = setTimeout(() => setIsDeleting(true), 1200);
+    } else if (isDeleting && typingIndex > 0) {
+      timeout = setTimeout(() => {
+        setDisplayedText((prev) => prev.slice(0, -1));
+        setTypingIndex(typingIndex - 1);
+      }, 60);
+    } else if (isDeleting && typingIndex === 0) {
+      timeout = setTimeout(() => setIsDeleting(false), 600);
+    }
+    return () => clearTimeout(timeout);
+  }, [typingIndex, isDeleting]);
+
   return (
-    <div className="screen hero-screen">
-      <div className="content">
-        <div className="avatar">
-          <div className="avatar-ring"></div>
-          <div className="avatar-inner">JS</div>
-        </div>
-        <h1 className="name">John Smith</h1>
-        <p className="title">Full Stack Developer</p>
-        <div className="stats">
-          <div className="stat">
-            <span className="number">50+</span>
-            <span className="label">Projects</span>
-          </div>
-          <div className="stat">
-            <span className="number">5+</span>
-            <span className="label">Years</span>
-          </div>
-        </div>
+    <div className="hero-phone-content-horizontal">
+      <div className="hero-horizontal-left">
+        <h1 className="hero-typing-horizontal">
+          <span>{displayedText}</span>
+          <span className="typing-cursor">|</span>
+        </h1>
+        <h2 className="hero-title-horizontal">Full Stack Developer</h2>
+      </div>
+      <div className="hero-avatar-container-horizontal">
+        <img src={AVATAR_URL} alt="Arnav Khandelwal" className="hero-avatar-horizontal" />
       </div>
       <style jsx>{`
-        .screen {
-          width: 100%;
-          height: 100%;
+        .hero-phone-content-horizontal {
           display: flex;
+          flex-direction: row;
           align-items: center;
-          justify-content: center;
+          justify-content: space-between;
+          height: 100%;
+          width: 100%;
+          padding: 2rem 2.5rem;
           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          color: white;
         }
-
-        .content {
-          text-align: center;
-          padding: 2rem;
+        .hero-horizontal-left {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
         }
-
-        .avatar {
-          position: relative;
-          width: 80px;
-          height: 80px;
-          margin: 0 auto 1.5rem;
+        .hero-typing-horizontal {
+          font-size: 2rem;
+          font-weight: 700;
+          color: #fff;
+          margin-bottom: 0.7rem;
+          min-width: 220px;
         }
-
-        .avatar-ring {
-          position: absolute;
-          inset: 0;
-          border: 3px solid rgba(255, 255, 255, 0.3);
-          border-radius: 50%;
-          animation: rotate 3s linear infinite;
+        .typing-cursor {
+          display: inline-block;
+          width: 1ch;
+          color: #fff;
+          animation: blink 1s steps(1) infinite;
         }
-
-        .avatar-inner {
-          width: 100%;
-          height: 100%;
-          background: rgba(255, 255, 255, 0.2);
-          border-radius: 50%;
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+        .hero-title-horizontal {
+          font-size: 1.3rem;
+          color: #f3f3f3;
+          font-weight: 500;
+          margin-bottom: 0;
+        }
+        .hero-avatar-container-horizontal {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 1.5rem;
-          font-weight: bold;
-          backdrop-filter: blur(10px);
         }
-
-        .name {
-          font-size: 1.5rem;
-          font-weight: 700;
-          margin-bottom: 0.5rem;
+        .hero-avatar-horizontal {
+          width: 110px;
+          height: 110px;
+          border-radius: 50%;
+          border: 3px solid #fff;
+          object-fit: cover;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.15);
         }
-
-        .title {
-          font-size: 0.9rem;
-          opacity: 0.8;
-          margin-bottom: 1.5rem;
-        }
-
-        .stats {
-          display: flex;
-          justify-content: center;
-          gap: 2rem;
-        }
-
-        .stat {
-          text-align: center;
-        }
-
-        .number {
-          display: block;
-          font-size: 1.2rem;
-          font-weight: bold;
-          color: #f093fb;
-        }
-
-        .label {
-          font-size: 0.7rem;
-          opacity: 0.7;
-        }
-
-        @keyframes rotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+        @media (max-width: 600px) {
+          .hero-phone-content-horizontal {
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+          }
+          .hero-horizontal-left {
+            align-items: center;
+          }
+          .hero-avatar-horizontal {
+            margin-top: 1.5rem;
+          }
         }
       `}</style>
     </div>

@@ -31,12 +31,14 @@
   border-radius: 25px;
   overflow: hidden;
   position: relative;
+  pointer-events: auto; /* Allow interactions */
 }
 
 .screen-content {
   width: 100%;
   height: 100%;
   animation: fadeIn 0.5s ease-in-out;
+  user-select: text; /* Enable text selection */
 }
 
 @keyframes fadeIn {
@@ -106,7 +108,7 @@
 }
 
 .hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #d3d3d3 0%, #a9a9a9 100%);
   color: white;
   text-align: center;
 }

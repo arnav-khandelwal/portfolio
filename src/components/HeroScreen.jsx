@@ -36,6 +36,13 @@ const HeroScreen = () => {
           <span className="typing-cursor">|</span>
         </h1>
         <h2 className="hero-title-horizontal">Full Stack Developer</h2>
+        <p className="hero-description">
+          Full-stack developer with 1+ years of experience building scalable web and mobile apps using MERN and Flutter. Passionate about backend-heavy roles, AI integration, and solving real-world problems
+        </p>
+        <div className="hero-buttons">
+          <a href="#contact" className="btn-primary">Contact Me</a>
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-secondary">My Resume</a>
+        </div>
       </div>
       <div className="hero-avatar-container-horizontal">
         <img src={AVATAR_URL} alt="Arnav Khandelwal" className="hero-avatar-horizontal" />
@@ -49,7 +56,7 @@ const HeroScreen = () => {
           height: 100%;
           width: 100%;
           padding: 2rem 2.5rem;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          background: #111;
         }
         .hero-horizontal-left {
           display: flex;
@@ -57,27 +64,59 @@ const HeroScreen = () => {
           align-items: flex-start;
         }
         .hero-typing-horizontal {
-          font-size: 2rem;
+          font-size: 1.1rem;
           font-weight: 700;
           color: #fff;
-          margin-bottom: 0.7rem;
-          min-width: 220px;
-        }
-        .typing-cursor {
-          display: inline-block;
-          width: 1ch;
-          color: #fff;
-          animation: blink 1s steps(1) infinite;
-        }
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
+          margin-bottom: 0.5rem;
+          min-width: 180px;
         }
         .hero-title-horizontal {
-          font-size: 1.3rem;
-          color: #f3f3f3;
+          font-size: 0.8rem;
+          color: #fff;
           font-weight: 500;
-          margin-bottom: 0;
+          margin-bottom: 0.5rem;
+        }
+        .hero-description {
+          color: #e0e0e0;
+          font-size: 0.7rem;
+          margin-bottom: 0.6rem;
+          max-width: 280px;
+          text-align: justify;
+        }
+        .hero-buttons {
+          display: flex;
+          gap: 0.5rem;
+        }
+        .btn-primary, .btn-secondary {
+          padding: 7px 16px;
+          border-radius: 50px;
+          font-size: 0.7rem;
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+          text-decoration: none;
+        }
+        .btn-primary {
+          background: #fff;
+          color: #111;
+          border: 2px solid #fff;
+        }
+        .btn-primary:hover {
+          background: #111;
+          color: #fff;
+          border: 2px solid #fff;
+          box-shadow: 0 0 0 2px #fff;
+        }
+        .btn-secondary {
+          background: transparent;
+          color: #fff;
+          border: 2px solid #fff;
+        }
+        .btn-secondary:hover {
+          background: #fff;
+          color: #111;
+          border: 2px solid #fff;
         }
         .hero-avatar-container-horizontal {
           display: flex;
@@ -85,10 +124,10 @@ const HeroScreen = () => {
           justify-content: center;
         }
         .hero-avatar-horizontal {
-          width: 110px;
-          height: 110px;
+          width: 120px;
+          height: 120px;
           border-radius: 50%;
-          border: 3px solid #fff;
+          border: 2px solid #fff;
           object-fit: cover;
           box-shadow: 0 2px 16px rgba(0,0,0,0.15);
         }

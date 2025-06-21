@@ -125,7 +125,7 @@ const App = () => {
   const getPhoneStyle = () => {
     if (currentSection === 'hero') {
       return {
-        transform: 'rotate(0deg) scale(2.2)',
+        transform: 'rotate(0deg) scale(2.4)',
         width: '560px',
         height: '280px',
         transition: 'transform 0.6s cubic-bezier(0.4,0,0.2,1), width 0.6s, height 0.6s',

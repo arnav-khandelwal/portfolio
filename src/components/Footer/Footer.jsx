@@ -46,7 +46,7 @@ const Footer = () => {
             </button>
           </div>
           <div className="footer__bottom">
-            <p>&copy; 2025 Your Name. All rights reserved.</p>
+            <p>&copy; 2025 Arnav Khandelwal. All rights reserved.</p>
             <div className="footer__links">
               <a href="#about">About</a>
               <a href="#skills">Skills</a>

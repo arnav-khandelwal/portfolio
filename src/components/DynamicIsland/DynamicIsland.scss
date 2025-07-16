@@ -1,0 +1,248 @@
+@use '../../styles/variables' as *;
+
+.dynamic-island {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  
+  // Remove main container background and sizing
+  background: none;
+  border: none;
+  box-shadow: none;
+  
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0;
+  
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  // Floating block styles
+  .floating-block {
+    background: rgba(45, 45, 45, 0.98);
+    // backdrop-filter: blur(25px);
+    border-radius: 30px;
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    
+    // box-shadow: 
+    //   0 10px 40px rgba(0, 0, 0, 0.4),
+    //   0 4px 15px rgba(0, 0, 0, 0.3),
+    //   inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    //   inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    &:hover {
+      box-shadow: 
+        0 15px 50px rgba(0, 0, 0, 0.5),
+        0 6px 20px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+      
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+  }
+
+  .hamburger-block {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu-block {
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+  }
+
+  &__hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &:active {
+      background: rgba(255, 255, 255, 0.12);
+      transform: scale(0.95);
+    }
+  }
+
+  &__hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 18px;
+    height: 14px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__line {
+    width: 18px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 2px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  &__menu {
+    display: flex;
+    gap: 15px;
+    opacity: 0;
+    overflow: hidden;
+    
+    // Ensure menu is visible when expanded
+    .dynamic-island.expanded & {
+      opacity: 1;
+    }
+  }
+
+  &__menu-item {
+    background: none;
+    border: none;
+    border-radius: 30px;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    opacity: 0; // Start invisible for GSAP animation
+    
+    // Ensure visibility when expanded (fallback)
+    .dynamic-island.expanded & {
+      opacity: 1;
+    }
+    &:active {
+      background: rgba(255, 255, 255, 0.12);
+      transform: scale(0.95);
+    }
+  }
+
+  &__icon {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+    opacity: 1; // Ensure icon is always visible
+  }
+
+  &__label {
+    color: rgba(255, 255, 255, 0.95);
+    font-family: $font-primary;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    display: block;
+    white-space: nowrap;
+    opacity: 1; // Ensure label is always visible
+  }
+}
+
+// Responsive adjustments
+@media (max-width: $tablet) {
+  .dynamic-island {
+    bottom: 20px;
+    
+    &__menu-item {
+      padding: $spacing-xs $spacing-sm;
+      min-width: 60px;
+      border-radius: 15px;
+    }
+    
+    &__label {
+      font-size: 0.75rem;
+    }
+    
+    &__icon {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .dynamic-island {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 25px;
+    
+    &__hamburger {
+      width: 50px;
+      height: 50px;
+      border-radius: 25px;
+    }
+    
+    &__hamburger-lines {
+      width: 16px;
+      height: 12px;
+      gap: 3px;
+    }
+    
+    &__line {
+      width: 16px;
+      height: 1.5px;
+    }
+    
+    &__menu-item {
+      padding: $spacing-xs;
+      border-radius: 12px;
+      min-width: 45px;
+    }
+    
+    &__label {
+      display: none; // Hide labels on mobile
+    }
+    
+    &__icon {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Enhanced floating animation
+@keyframes float {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0px);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-3px);
+  }
+}
+
+.dynamic-island {
+  animation: float 4s ease-in-out infinite;
+}

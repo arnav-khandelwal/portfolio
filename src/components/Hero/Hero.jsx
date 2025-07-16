@@ -60,7 +60,7 @@ const Hero = () => {
       <div className="container">
         <div ref={heroRef} className="hero__content">
           <h1 ref={titleRef} className="hero__title">
-            Hello, I'm <span>Your Name</span>
+            Hello, I'm <span>Arnav</span>
           </h1>
           <h2 ref={subtitleRef} className="hero__subtitle">Creative Developer & Designer</h2>
           <p ref={descriptionRef} className="hero__description">

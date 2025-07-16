@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables' as *;
 
 .header {
   position: fixed;
@@ -11,7 +11,7 @@
 
   &__content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
   }
 
@@ -29,54 +29,174 @@
       }
     }
   }
+}
+
+// Floating Menu Styles
+.floating-menu {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  &__button {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, $accent-brown, $dark-beige);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    transition: all $transition-smooth;
+    box-shadow: 0 8px 25px rgba(139, 115, 85, 0.3);
+    position: relative;
+    z-index: 2;
+
+    &:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 12px 35px rgba(139, 115, 85, 0.4);
+    }
+
+    &--open {
+      .floating-menu__line {
+        &:nth-child(1) {
+          transform: rotate(45deg) translate(7px, 7px);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg) translate(7px, -7px);
+        }
+      }
+    }
+  }
+
+  &__line {
+    width: 20px;
+    height: 2.5px;
+    background: $white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
 
   &__nav {
     display: flex;
-    gap: $spacing-lg;
+    gap: $spacing-sm;
+    margin-left: $spacing-sm;
+  }
 
-    @media (max-width: $mobile) {
-      gap: $spacing-sm;
-    }
+  &__item {
+    width: 60px;
+    height: 60px;
+    background: $white;
+    border: 2px solid rgba(139, 115, 85, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-smooth;
+    box-shadow: 0 6px 20px rgba(139, 115, 85, 0.15);
+    position: relative;
+    opacity: 0;
+    transform: translateX(-100px) scale(0.5);
 
-    button {
-      background: none;
-      border: none;
-      font-family: $font-primary;
-      font-size: 1rem;
-      font-weight: 500;
-      color: $text-light;
-      cursor: pointer;
+    &::before {
+      content: attr(data-text);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: $text-dark;
+      color: $white;
       padding: $spacing-xs $spacing-sm;
-      border-radius: 25px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
       transition: all $transition-smooth;
-      position: relative;
-      overflow: hidden;
+      margin-bottom: $spacing-xs;
+      font-family: $font-primary;
 
-      &::before {
+      &::after {
         content: '';
         position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(139, 115, 85, 0.1), transparent);
-        transition: left 0.5s ease;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: $text-dark;
+      }
+    }
+
+    &:hover {
+      background: rgba(139, 115, 85, 0.1);
+      border-color: $accent-brown;
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 10px 30px rgba(139, 115, 85, 0.25);
+
+      &::before {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(-5px);
       }
 
-      &:hover {
-        color: $accent-brown;
-        background-color: rgba(139, 115, 85, 0.1);
-        transform: translateY(-2px);
-
-        &::before {
-          left: 100%;
-        }
+      .floating-menu__icon {
+        transform: scale(1.2);
       }
+    }
+  }
 
-      @media (max-width: $mobile) {
-        font-size: 0.9rem;
-        padding: $spacing-xs;
+  &__icon {
+    font-size: 1.5rem;
+    transition: all $transition-smooth;
+  }
+}
+
+@media (max-width: $mobile) {
+  .floating-menu {
+    bottom: 20px;
+    gap: $spacing-xs;
+
+    &__button {
+      width: 60px;
+      height: 60px;
+    }
+
+    &__line {
+      width: 18px;
+      height: 2px;
+    }
+
+    &__item {
+      width: 50px;
+      height: 50px;
+
+      &::before {
+        font-size: 0.7rem;
+        padding: 4px 8px;
       }
+    }
+
+    &__icon {
+      font-size: 1.2rem;
+    }
+  }
+
+  .header {
+    &__logo span {
+      font-size: 1.5rem;
     }
   }
 }

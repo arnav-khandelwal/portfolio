@@ -1,0 +1,164 @@
+@import '../../styles/variables.scss';
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, $light-beige 0%, $primary-beige 50%, $medium-beige 100%);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(139, 115, 85, 0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 600;
+    color: $text-dark;
+    margin-bottom: $spacing-md;
+    line-height: 1.1;
+
+    span {
+      background: linear-gradient(135deg, $accent-brown, $dark-beige);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(135deg, $accent-brown, $dark-beige);
+        transform: scaleX(0);
+        animation: underlineExpand 2s ease-out 2s forwards;
+      }
+    }
+  }
+
+  &__subtitle {
+    font-family: $font-primary;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 300;
+    color: $text-light;
+    margin-bottom: $spacing-lg;
+    letter-spacing: 1px;
+  }
+
+  &__description {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: $text-light;
+    margin-bottom: $spacing-xl;
+    line-height: 1.8;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-md $spacing-xl;
+    background: linear-gradient(135deg, $accent-brown, $dark-beige);
+    color: $white;
+    border: none;
+    border-radius: 50px;
+    font-family: $font-primary;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all $transition-smooth;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s ease;
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(139, 115, 85, 0.3);
+
+      &::before {
+        left: 100%;
+      }
+
+      .hero__cta-arrow {
+        transform: translateX(5px);
+      }
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+
+  &__cta-arrow {
+    font-size: 1.3rem;
+    transition: transform $transition-smooth;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes underlineExpand {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: $mobile) {
+  .hero {
+    &__content {
+      padding: 0 $spacing-sm;
+    }
+
+    &__cta {
+      padding: $spacing-sm $spacing-lg;
+      font-size: 1rem;
+    }
+  }
+}

@@ -1,0 +1,82 @@
+@import '../../styles/variables.scss';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: $spacing-md 0;
+  transition: all $transition-smooth;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo {
+    span {
+      font-family: $font-heading;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: $accent-brown;
+      cursor: pointer;
+      transition: color $transition-smooth;
+
+      &:hover {
+        color: $text-dark;
+      }
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: $spacing-lg;
+
+    @media (max-width: $mobile) {
+      gap: $spacing-sm;
+    }
+
+    button {
+      background: none;
+      border: none;
+      font-family: $font-primary;
+      font-size: 1rem;
+      font-weight: 500;
+      color: $text-light;
+      cursor: pointer;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: 25px;
+      transition: all $transition-smooth;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(139, 115, 85, 0.1), transparent);
+        transition: left 0.5s ease;
+      }
+
+      &:hover {
+        color: $accent-brown;
+        background-color: rgba(139, 115, 85, 0.1);
+        transform: translateY(-2px);
+
+        &::before {
+          left: 100%;
+        }
+      }
+
+      @media (max-width: $mobile) {
+        font-size: 0.9rem;
+        padding: $spacing-xs;
+      }
+    }
+  }
+}

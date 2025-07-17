@@ -1,6 +1,8 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SiGithub } from 'react-icons/si';
+import { HiGlobeAlt } from 'react-icons/hi';
 import './Projects.scss';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,107 +16,88 @@ const Projects = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const projects = [
-    {
-      title: 'E-Commerce Platform',
-      description: 'A modern, responsive e-commerce platform built with React and Node.js, featuring real-time inventory management and seamless payment integration.',
-      fullDescription: 'This comprehensive e-commerce solution revolutionizes online shopping with its intuitive interface and robust backend architecture. Built using React for dynamic user interactions and Node.js for scalable server-side operations, the platform seamlessly integrates with MongoDB for efficient data management and Stripe for secure payment processing.',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      image: '🛒',
-      link: '#',
-      gallery: [
-        '🖥️ Desktop View',
-        '📱 Mobile Interface', 
-        '🛒 Shopping Cart',
-        '💳 Checkout Process'
-      ],
-      features: [
-        'Real-time inventory tracking',
-        'Advanced search and filtering',
-        'Secure payment gateway integration',
-        'User authentication and profiles',
-        'Admin dashboard for management',
-        'Responsive design for all devices'
-      ],
-      role: 'Full-Stack Developer',
-      duration: '3 months',
-      year: '2024'
-    },
-    {
-      title: 'Task Management App',
-      description: 'An intuitive task management application with drag-and-drop functionality, real-time collaboration, and advanced filtering options.',
-      fullDescription: 'A powerful productivity tool designed to streamline team collaboration and project management. Built with Vue.js for reactive user experiences and Firebase for real-time data synchronization, this application transforms how teams organize, track, and complete their work.',
-      technologies: ['Vue.js', 'Firebase', 'TypeScript', 'CSS3'],
-      image: '📋',
-      link: '#',
-      gallery: [
-        '📊 Dashboard Overview',
-        '📋 Task Boards',
-        '👥 Team Collaboration',
-        '📈 Analytics View'
-      ],
-      features: [
-        'Drag-and-drop task management',
-        'Real-time team collaboration',
-        'Advanced filtering and search',
-        'Progress tracking and analytics',
-        'Customizable project boards',
-        'Notification system'
-      ],
-      role: 'Frontend Developer',
-      duration: '2 months',
-      year: '2024'
-    },
-    {
-      title: 'Weather Dashboard',
-      description: 'A beautiful weather dashboard that provides detailed forecasts, interactive maps, and personalized weather alerts for multiple locations.',
-      fullDescription: 'An elegant weather application that combines beautiful design with powerful functionality. Utilizing multiple weather APIs and Chart.js for data visualization, this dashboard provides comprehensive weather information with an intuitive and visually appealing interface.',
-      technologies: ['React', 'API Integration', 'Chart.js', 'SCSS'],
-      image: '🌤️',
-      link: '#',
-      gallery: [
-        '🌍 Global Weather Map',
-        '📊 Weather Charts',
-        '📱 Mobile Dashboard',
-        '🔔 Alert System'
-      ],
-      features: [
-        'Multi-location weather tracking',
-        'Interactive weather maps',
-        'Detailed 7-day forecasts',
-        'Weather alerts and notifications',
-        'Historical weather data',
-        'Customizable dashboard widgets'
-      ],
-      role: 'Frontend Developer',
-      duration: '6 weeks',
-      year: '2023'
-    },
-    {
-      title: 'Portfolio Website',
-      description: 'A responsive portfolio website showcasing creative animations, modern design principles, and optimized performance.',
-      fullDescription: 'A cutting-edge portfolio website that demonstrates advanced web development techniques and creative design. Built with React and enhanced with GSAP animations, this project showcases the perfect blend of aesthetics and functionality.',
-      technologies: ['React', 'GSAP', 'SCSS', 'Vite'],
-      image: '💼',
-      link: '#',
-      gallery: [
-        '🎨 Design System',
-        '⚡ Performance Metrics',
-        '📱 Responsive Design',
-        '🎭 Animation Showcase'
-      ],
-      features: [
-        'Advanced GSAP animations',
-        'Responsive design system',
-        'Optimized performance',
-        'Modern UI/UX principles',
-        'SEO optimized',
-        'Accessibility compliant'
-      ],
-      role: 'Full-Stack Developer & Designer',
-      duration: '1 month',
-      year: '2024'
-    }
-  ];
+  {
+    title: 'SportsSocial',
+    description: 'A full-stack social platform to discover, join, and host events with real-time chat and location filtering.',
+    fullDescription:
+      'SportsSocial is a MERN-based platform that connects players by letting them create, join, and manage sports events. It features real-time chat powered by WebSockets, authentication using JWT, and location-based filtering using PostGIS and Google Maps API. Supabase (PostgreSQL) serves as the scalable backend while the frontend is built with React.js and SCSS for a smooth and responsive UI.',
+    technologies: ['React.js', 'Node.js', 'Supabase (PostgreSQL)', 'WebSockets', 'Google Maps API', 'SCSS'],
+    link: 'https://sportssocial.netlify.app',
+    github: 'https://github.com/arnav-khandelwal/sportssocial',
+    features: [
+      'JWT-based user authentication',
+      'Real-time chat with WebSockets',
+      'Location filtering with PostGIS + Google Maps API',
+      'Event hosting and joining system',
+      'Responsive UI with SCSS',
+      'Tournament registration and management'
+    ]
+  },
+  {
+    title: 'Travel AI',
+    description: 'An AI-powered travel planner for booking hotels, flights, and generating personalized itineraries.',
+    fullDescription:
+      'Travel AI is an AI assistant that helps users plan trips by integrating Gemini API, OpenWeatherMap, Booking.com, and SkyScanner. It reduces planning effort by 80% by automating hotel and flight suggestions, generating custom itineraries, and providing weather-based travel insights. The app is built with React.js and optimized for responsive, modular components.',
+    technologies: ['React.js', 'Gemini API', 'OpenWeatherMap', 'SkyScanner API', 'SCSS'],
+    link: 'https://travelai-2tdl.onrender.com/',
+    github: 'https://github.com/arnav-khandelwal/travel-ai',
+    features: [
+      'AI-driven itinerary generation',
+      'Live hotel and flight search',
+      'Weather-based travel suggestions',
+      'Responsive and modular design',
+      'Fast API optimization for better UX'
+    ]
+  },
+  {
+    title: 'MediVerse',
+    description: 'An AI-powered tool that identifies medicines from images and provides safe usage information.',
+    fullDescription:
+      'MediVerse is a health-focused AI web app that identifies medicines using image recognition and provides detailed usage instructions. It integrates Gemini API for AI processing, Akash AI for deep learning, and features a chatbot + prescription analyzer. Built with React.js for the frontend and Express.js for backend API handling.',
+    technologies: ['React.js', 'Express.js', 'Gemini API', 'Akash AI', 'SCSS'],
+    link: 'https://mediverse-jh0x.onrender.com/',
+    github: 'https://github.com/arnav-khandelwal/mediverse',
+    features: [
+      'Image recognition for medicine identification',
+      'AI-powered chatbot for health queries',
+      'Prescription text analyzer',
+      '90% accuracy in medicine detection',
+      'Responsive UI for mobile and desktop'
+    ]
+  },
+  {
+    title: 'Mad Marketing Club Website & CRM',
+    description: 'A company website and CRM platform built to manage leads and streamline business operations.',
+    fullDescription:
+      'Developed the official Mad Marketing Club website with React.js, optimized for a 40% faster load speed using code splitting and lazy loading. Built a scalable CRM software as a sellable product, integrating authentication, lead tracking, and role-based access. Created a real-time analytics dashboard that reduced manual work by 70%.',
+    technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'SCSS'],
+    link: 'https://madmarketingclub.com/',
+    github: 'https://github.com/arnav-khandelwal/mad-marketing-club',
+    features: [
+      'Fully responsive company website',
+      'CRM with secure user authentication',
+      'Lead tracking and role-based access',
+      'Real-time analytics dashboard',
+      'Code-splitting for faster performance'
+    ]
+  },
+  {
+    title: 'Personal Portfolio Website',
+    description: 'A responsive portfolio website showcasing creative animations, modern design principles, and optimized performance.',
+    fullDescription:
+      'A cutting-edge personal portfolio website designed to showcase projects and skills with modern UI/UX practices. Built with React.js and enhanced with GSAP animations for smooth transitions and interactive visuals. Styled with SCSS for modularity and optimized using Vite for blazing-fast performance.',
+    technologies: ['React.js', 'GSAP', 'SCSS', 'Vite'],
+    link: '#',
+    github: 'https://github.com/arnav-khandelwal/portfolio',
+    features: [
+      'Smooth GSAP animations for sections',
+      'Responsive design optimized for all devices',
+      'SEO-friendly and accessible',
+      'Lightweight and fast with Vite',
+      'Modern UI/UX principles'
+    ]
+  }
+];
 
   const openProjectModal = (project) => {
     setSelectedProject(project);
@@ -242,14 +225,6 @@ const Projects = () => {
                 onClick={() => openProjectModal(project)}
                 style={{ cursor: 'pointer' }}
               >
-                <div className="projects__image">
-                  <span className="projects__emoji">{project.image}</span>
-                  <div className="projects__overlay">
-                    <span className="projects__link">
-                      View Details →
-                    </span>
-                  </div>
-                </div>
                 <div className="projects__content">
                   <h3 className="projects__item-title">{project.title}</h3>
                   <p className="projects__description">{project.description}</p>
@@ -280,30 +255,37 @@ const Projects = () => {
             
             <div className="project-modal__scrollable">
               <div className="project-modal__header">
-                <div className="project-modal__hero">
-                  <span className="project-modal__emoji">{selectedProject.image}</span>
-                  <div className="project-modal__meta">
-                    <span className="project-modal__year">{selectedProject.year}</span>
-                    <span className="project-modal__role">{selectedProject.role}</span>
-                    <span className="project-modal__duration">{selectedProject.duration}</span>
-                  </div>
-                </div>
-                <h1 className="project-modal__title">{selectedProject.title}</h1>
-                <p className="project-modal__description">{selectedProject.fullDescription}</p>
-              </div>
-
-              <div className="project-modal__body">
-                <div className="project-modal__section">
-                  <h3>Project Gallery</h3>
-                  <div className="project-modal__gallery">
-                    {selectedProject.gallery.map((item, index) => (
-                      <div key={index} className="project-modal__gallery-item">
-                        <span>{item}</span>
+                <div className="project-modal__header-content">
+                  <div className="project-modal__title-section">
+                    <h1 className="project-modal__title">{selectedProject.title}</h1>
+                    <div className="project-modal__content-with-links">
+                      <p className="project-modal__description">{selectedProject.fullDescription}</p>
+                      <div className="project-modal__links">
+                        <a 
+                          href={selectedProject.github} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="project-modal__link-btn"
+                          title="View GitHub Repository"
+                        >
+                          <SiGithub />
+                          <span>GitHub</span>
+                        </a>
+                        <a 
+                          href={selectedProject.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="project-modal__link-btn"
+                          title="View Live Project"
+                        >
+                          <HiGlobeAlt />
+                          <span>Live Site</span>
+                        </a>
                       </div>
-                    ))}
+                    </div>
                   </div>
                 </div>
-
+              </div>              <div className="project-modal__body">
                 <div className="project-modal__section">
                   <h3>Key Features</h3>
                   <ul className="project-modal__features">
@@ -323,15 +305,6 @@ const Projects = () => {
                     ))}
                   </div>
                 </div>
-              </div>
-
-              <div className="project-modal__footer">
-                <a href={selectedProject.link} className="project-modal__visit-btn">
-                  Visit Project
-                </a>
-                <button className="project-modal__close-btn" onClick={closeProjectModal}>
-                  Close
-                </button>
               </div>
             </div>
           </div>

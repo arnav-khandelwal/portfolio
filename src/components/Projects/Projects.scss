@@ -284,34 +284,81 @@
     border-radius: 25px 25px 0 0;
   }
 
-  &__hero {
+  &__header-content {
     display: flex;
-    align-items: center;
-    gap: $spacing-lg;
-    margin-bottom: $spacing-lg;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: $spacing-xl;
+
+    @media (max-width: $tablet) {
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
   }
 
-  &__emoji {
-    font-size: 4rem;
-    background: linear-gradient(135deg, $medium-beige, $dark-beige);
-    border-radius: 20px;
-    padding: $spacing-lg;
+  &__title-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__content-with-links {
+    display: flex;
+    gap: $spacing-xl;
+    align-items: flex-start;
+
+    @media (max-width: $tablet) {
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    flex-shrink: 0;
+    width: 200px;
+
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
+
+    @media (max-width: $mobile) {
+      width: 100%;
+    }
+  }
+
+  &__link-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 100px;
-    height: 100px;
-  }
+    gap: $spacing-sm;
+    padding: $spacing-md $spacing-xl;
+    background: linear-gradient(135deg, $accent-brown, $dark-beige);
+    color: $white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all $transition-smooth;
+    border: none;
+    cursor: pointer;
+    width: 100%;
 
-  &__meta {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-xs;
+    svg {
+      font-size: 1.1rem;
+      color: inherit;
+    }
 
-    span {
-      font-size: 0.9rem;
-      color: $text-light;
-      font-weight: 500;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139, 115, 85, 0.3);
+      background: linear-gradient(135deg, lighten($accent-brown, 5%), lighten($dark-beige, 5%));
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 
@@ -328,7 +375,9 @@
     font-size: 1.1rem;
     line-height: 1.7;
     color: $text-light;
-    margin-bottom: $spacing-lg;
+    margin-bottom: 0;
+    text-align: justify;
+    flex: 1;
   }
 
   &__body {
@@ -487,9 +536,14 @@
       padding: $spacing-xl $spacing-lg $spacing-md;
     }
 
-    &__hero {
+    &__header-content {
       flex-direction: column;
-      text-align: center;
+      gap: $spacing-lg;
+    }
+
+    &__links {
+      justify-content: center;
+      width: 100%;
     }
 
     &__body {

@@ -216,9 +216,33 @@
     border-radius: 25px;
     bottom: 20px;
     
+    // Mobile vertical layout - hamburger stays at bottom, menu grows upward
+    flex-direction: column-reverse;
+    gap: 10px;
+    align-items: center;
+    
     &.expanded {
-      min-width: 300px;
-      margin-left: -150px; // Adjust for mobile width
+      height: auto; // Allow height to grow naturally
+      width: 50px; // Keep width fixed on mobile
+      margin-left: -25px; // Center the fixed width
+    }
+    
+    .hamburger-block {
+      width: 50px;
+      height: 50px;
+      order: 2; // Keep hamburger at bottom - stays in place
+      position: relative; // Ensure it stays in original position
+    }
+    
+    .menu-block {
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      order: 1; // Menu items go above hamburger
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative; // Allow proper stacking
     }
     
     &__hamburger {
@@ -238,10 +262,24 @@
       height: 1.5px;
     }
     
+    &__menu {
+      flex-direction: column-reverse; // Stack menu items vertically above hamburger
+      gap: 10px;
+      position: absolute; // Position relative to the island
+      bottom: 70px; // Start above the hamburger (50px + 20px gap)
+      left: 50%;
+      transform: translateX(-50%); // Center horizontally
+    }
+    
     &__menu-item {
       padding: $spacing-xs;
-      border-radius: 12px;
-      min-width: 45px;
+      border-radius: 25px;
+      width: 50px;
+      height: 50px;
+      min-width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     &__label {
@@ -249,7 +287,7 @@
     }
     
     &__icon {
-      font-size: 0.9rem;
+      font-size: 1.1rem;
     }
   }
 }

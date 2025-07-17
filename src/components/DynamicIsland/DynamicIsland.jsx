@@ -65,6 +65,7 @@ const DynamicIsland = () => {
     const island = islandRef.current;
     const menuItems = menuItemsRef.current.children;
     const hamburger = hamburgerRef.current;
+    const isMobile = window.innerWidth <= 768;
 
     if (!isExpanded) {
       // Expand the island
@@ -76,49 +77,79 @@ const DynamicIsland = () => {
       // Show menu items first (but keep them invisible)
       gsap.set(menuItems, { display: "flex", opacity: 0 });
       
-      // Animate menu items with enhanced effects FIRST
-      gsap.fromTo(menuItems,
-        { 
-          opacity: 0, 
-          y: 40, 
-          x: -20, 
-          scale: 0.4, 
-          rotationY: -25,
-          filter: "blur(10px)"
-        },
-        {
-          opacity: 1,
-          y: 0,
-          x: 0,
-          scale: 1,
-          rotationY: 0,
-          filter: "blur(0px)",
-          duration: 1.0,
-          stagger: 0.12,
-          ease: "back.out(1.7)",
-          delay: 0.3
-        }
-      );
+      if (isMobile) {
+        // Mobile: Keep hamburger in place, animate menu items appearing above
+        gsap.fromTo(menuItems,
+          { 
+            opacity: 0, 
+            y: 30, // Start closer to hamburger
+            scale: 0.6, 
+            rotationX: -45,
+            filter: "blur(8px)"
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotationX: 0,
+            filter: "blur(0px)",
+            duration: 0.7,
+            stagger: 0.08,
+            ease: "back.out(1.5)",
+            delay: 0.1
+          }
+        );
 
-      // THEN animate island expansion (after menu items are visible)
+        // Mobile: Don't animate island height, keep hamburger position fixed
+        // Just ensure the container can accommodate the menu items
+        gsap.set(island, {
+          height: "auto"
+        });
+      } else {
+        // Desktop: Horizontal expansion animation (existing)
+        gsap.fromTo(menuItems,
+          { 
+            opacity: 0, 
+            y: 40, 
+            x: -20, 
+            scale: 0.4, 
+            rotationY: -25,
+            filter: "blur(10px)"
+          },
+          {
+            opacity: 1,
+            y: 0,
+            x: 0,
+            scale: 1,
+            rotationY: 0,
+            filter: "blur(0px)",
+            duration: 1.0,
+            stagger: 0.12,
+            ease: "back.out(1.7)",
+            delay: 0.3
+          }
+        );
+
+        // Desktop: Animate island width expansion
+        gsap.to(island, {
+          width: "auto",
+          minWidth: "520px",
+          duration: 1.0,
+          ease: "power2.out",
+          delay: 0.2
+        });
+      }
+
+      // Resume floating after expansion
       gsap.to(island, {
-        width: "auto",
-        minWidth: "520px",
-        duration: 1.0,
-        ease: "power2.out",
-        delay: 0.2,
-        onComplete: () => {
-          // Resume floating after expansion
-          gsap.to(island, {
-            y: -6,
-            rotation: 0.5,
-            duration: 3,
-            ease: "sine.inOut",
-            yoyo: true,
-            repeat: -1,
-            transformOrigin: "center center"
-          });
-        }
+        y: -6,
+        rotation: 0.5,
+        duration: 3,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        transformOrigin: "center center",
+        delay: 1.0
       });
 
       // Smooth hamburger to cross transformation
@@ -148,42 +179,76 @@ const DynamicIsland = () => {
       // Kill floating animation during collapse
       gsap.killTweensOf(island);
 
-      // First animate menu items out smoothly
-      gsap.to(menuItems, {
-        opacity: 0,
-        y: 30,
-        x: -30,
-        scale: 0.7,
-        rotationY: 20,
-        filter: "blur(6px)",
-        duration: 0.6,
-        stagger: 0.05,
-        ease: "power2.in"
-      });
+      if (isMobile) {
+        // Mobile: Mirror the expansion animation for collapse
+        gsap.to(menuItems, {
+          opacity: 0,
+          y: 30, // Move down towards hamburger (reverse of expansion y: 30 -> y: 0)
+          scale: 0.6, // Scale down (reverse of expansion scale: 0.6 -> scale: 1)
+          rotationX: -45, // Rotate back (reverse of expansion rotationX: -45 -> rotationX: 0)
+          filter: "blur(8px)", // Add blur (reverse of expansion blur: 8px -> blur: 0px)
+          duration: 0.7, // Same duration as expansion
+          stagger: 0.08, // Same stagger as expansion
+          ease: "power2.in", // Smoother ease for collapse
+          onComplete: () => {
+            // Hide menu items after animation
+            gsap.set(menuItems, { display: "none" });
+            
+            // Resume floating after collapse
+            gsap.to(island, {
+              y: -6,
+              rotation: 0.5,
+              duration: 3,
+              ease: "sine.inOut",
+              yoyo: true,
+              repeat: -1,
+              transformOrigin: "center center"
+            });
+          }
+        });
 
-      // Then collapse island width AFTER menu items fade
-      gsap.to(island, {
-        width: "60px",
-        minWidth: "60px",
-        duration: 0.8,
-        ease: "power2.inOut",
-        delay: 0.4,
-        onComplete: () => {
-          // Hide menu items after island collapse
-          gsap.set(menuItems, { display: "none" });
-          
-          // Resume floating after collapse
-          gsap.to(island, {
-            y: -6,
-            rotation: 0.5,
-            duration: 3,
-            ease: "sine.inOut",
-            yoyo: true,
-            repeat: -1,
-            transformOrigin: "center center"
-          });
-        }
-      });
+        // Mobile: Keep island height consistent
+        gsap.set(island, {
+          height: "60px"
+        });
+      } else {
+        // Desktop: Mirror the expansion animation for collapse
+        gsap.to(menuItems, {
+          opacity: 0,
+          y: 40, // Move down (reverse of expansion y: 40 -> y: 0)
+          x: -20, // Move left (reverse of expansion x: -20 -> x: 0)
+          scale: 0.4, // Scale down (reverse of expansion scale: 0.4 -> scale: 1)
+          rotationY: -25, // Rotate back (reverse of expansion rotationY: -25 -> rotationY: 0)
+          filter: "blur(10px)", // Add blur (reverse of expansion blur: 10px -> blur: 0px)
+          duration: 1.0, // Same duration as expansion
+          stagger: 0.12, // Same stagger as expansion
+          ease: "power2.in"
+        });
+
+        // Desktop: Collapse island width with same timing
+        gsap.to(island, {
+          width: "60px",
+          minWidth: "60px",
+          duration: 1.0, // Same duration as expansion
+          ease: "power2.out", // Match expansion ease
+          delay: 0.2, // Same delay as expansion
+          onComplete: () => {
+            // Hide menu items after island collapse
+            gsap.set(menuItems, { display: "none" });
+            
+            // Resume floating after collapse
+            gsap.to(island, {
+              y: -6,
+              rotation: 0.5,
+              duration: 3,
+              ease: "sine.inOut",
+              yoyo: true,
+              repeat: -1,
+              transformOrigin: "center center"
+            });
+          }
+        });
+      }
 
       // Smooth cross to hamburger transformation
       const tl = gsap.timeline({ delay: 0.2 });
@@ -218,7 +283,7 @@ const DynamicIsland = () => {
 
   return (
     <div ref={islandRef} className={`dynamic-island ${isExpanded ? 'expanded' : ''}`}>
-      {/* Hamburger/Cross as separate floating block */}
+      {/* Hamburger/Cross - always at bottom on mobile, left on desktop */}
       <div className="floating-block hamburger-block">
         <button 
           className="dynamic-island__hamburger"
@@ -233,7 +298,7 @@ const DynamicIsland = () => {
         </button>
       </div>
 
-      {/* Menu items as separate floating blocks */}
+      {/* Menu items - stack vertically on mobile, horizontally on desktop */}
       <nav ref={menuItemsRef} className="dynamic-island__menu">
         {menuItems.map((item, index) => (
           <div key={item.id} className="floating-block menu-block">

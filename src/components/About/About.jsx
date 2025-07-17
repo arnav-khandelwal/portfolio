@@ -1,20 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import * as THREE from 'three';
 import './About.scss';
 
 gsap.registerPlugin(ScrollTrigger);
 
 // Widget component for About section interests
 const AboutWidget = ({ onOpenExperienceModal }) => {
-  const mountRef = useRef(null);
-  const sceneRef = useRef(null);
-  const rendererRef = useRef(null);
-  const cameraRef = useRef(null);
-  const atomGroupRef = useRef(null);
-  const orbitGroupsRef = useRef([]);
-  const iconsRef = useRef([]);
   const widgetContainerRef = useRef(null);
   const timelineRef = useRef(null);
   const [activeTab, setActiveTab] = React.useState('experience');
@@ -106,106 +98,6 @@ const AboutWidget = ({ onOpenExperienceModal }) => {
   ];
 
   useEffect(() => {
-    if (!mountRef.current) return;
-
-    // Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    
-    renderer.setSize(400, 400);
-    renderer.setClearColor(0x000000, 0);
-    mountRef.current.appendChild(renderer.domElement);
-
-    // Store refs
-    sceneRef.current = scene;
-    cameraRef.current = camera;
-    rendererRef.current = renderer;
-
-    // Create atom group
-    const atomGroup = new THREE.Group();
-    scene.add(atomGroup);
-    atomGroupRef.current = atomGroup;
-
-    // Initially hide the atom for entrance animation
-    atomGroup.scale.setScalar(0);
-    atomGroup.rotation.x = Math.PI;
-
-    // Create nucleus
-    const nucleusGeometry = new THREE.SphereGeometry(0.4, 32, 32);
-    const nucleusMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0x7C5E3C, // accent-brown from color palette
-      transparent: true,
-      opacity: 0.8
-    });
-    const nucleus = new THREE.Mesh(nucleusGeometry, nucleusMaterial);
-    atomGroup.add(nucleus);
-
-    // Create orbital rings with color palette colors
-    const ringRadii = [1.8, 2.6, 3.4];
-    const ringColors = [0xFFD580, 0xE6B8A2, 0xC2A98B]; // accent-gold, accent-rose, dark-beige
-    
-    ringRadii.forEach((radius, index) => {
-      const orbitGroup = new THREE.Group();
-      
-      // Create ring geometry - thicker rings
-      const ringGeometry = new THREE.RingGeometry(radius - 0.05, radius + 0.05, 64);
-      const ringMaterial = new THREE.MeshBasicMaterial({ 
-        color: ringColors[index],
-        transparent: true,
-        opacity: 0.6,
-        side: THREE.DoubleSide
-      });
-      const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-      
-      // Rotate rings for 3D effect with more varied angles
-      ring.rotation.x = Math.PI / 2 + (index * Math.PI / 5);
-      ring.rotation.z = index * Math.PI / 3;
-      
-      orbitGroup.add(ring);
-      
-      // Create orbiting particles/electrons - bigger spheres
-      const particleGeometry = new THREE.SphereGeometry(0.15, 12, 12);
-      const particleMaterial = new THREE.MeshBasicMaterial({ 
-        color: ringColors[index],
-        transparent: true,
-        opacity: 0.9
-      });
-      const particle = new THREE.Mesh(particleGeometry, particleMaterial);
-      particle.position.set(radius, 0, 0);
-      
-      orbitGroup.add(particle);
-      atomGroup.add(orbitGroup);
-      
-      orbitGroupsRef.current.push(orbitGroup);
-      iconsRef.current.push(particle);
-    });
-
-    // Position camera
-    camera.position.set(0, 0, 8);
-    camera.lookAt(0, 0, 0);
-
-    // GSAP Entrance Animation for the atom
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: widgetContainerRef.current,
-        start: "top 80%",
-        end: "bottom 20%",
-      }
-    })
-    .to(atomGroup.scale, {
-      x: 1,
-      y: 1,
-      z: 1,
-      duration: 1.5,
-      ease: "back.out(1.7)"
-    })
-    .to(atomGroup.rotation, {
-      x: 0,
-      duration: 1,
-      ease: "power2.out"
-    }, "-=1");
-
     // Animate timeline entrance
     gsap.fromTo('.about-widget__timeline-selector', 
       { y: -30, opacity: 0 },
@@ -235,56 +127,6 @@ const AboutWidget = ({ onOpenExperienceModal }) => {
         }
       }
     );
-
-    // Animation loop with slower movement
-    const animate = () => {
-      requestAnimationFrame(animate);
-      
-      // Rotate entire atom - slower movement
-      if (atomGroup) {
-        atomGroup.rotation.y += 0.005; // Reduced from 0.01
-        atomGroup.rotation.x += 0.002; // Reduced from 0.005
-      }
-      
-      // Rotate each orbit at different speeds - slower
-      orbitGroupsRef.current.forEach((orbitGroup, index) => {
-        if (orbitGroup) {
-          const speed = (index + 1) * 0.01; // Reduced from 0.02
-          orbitGroup.rotation.y += speed;
-          orbitGroup.rotation.z += speed * 0.3; // Reduced from 0.5
-        }
-      });
-      
-      // Pulsate nucleus - slower
-      if (nucleus) {
-        const scale = 1 + Math.sin(Date.now() * 0.002) * 0.15; // Reduced frequency and amplitude
-        nucleus.scale.setScalar(scale);
-      }
-      
-      renderer.render(scene, camera);
-    };
-    
-    animate();
-
-    // Handle resize
-    const handleResize = () => {
-      if (renderer && camera) {
-        renderer.setSize(400, 400);
-        camera.aspect = 1;
-        camera.updateProjectionMatrix();
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement);
-      }
-      renderer.dispose();
-    };
   }, []);
 
   return (
@@ -348,11 +190,6 @@ const AboutWidget = ({ onOpenExperienceModal }) => {
             ))}
           </div>
         )}
-      </div>
-
-      {/* 3D Atom Background */}
-      <div className="about-widget__3d-container">
-        <div ref={mountRef} className="about-widget__3d-atom" />
       </div>
     </div>
   );

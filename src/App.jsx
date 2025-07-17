@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import GlobalBackground from './components/GlobalBackground/GlobalBackground';
 import DynamicIsland from './components/DynamicIsland/DynamicIsland';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
@@ -36,6 +37,7 @@ function App() {
 
   return (
     <div className="App">
+      <GlobalBackground />
       <Hero />
       <About />
       <Skills />

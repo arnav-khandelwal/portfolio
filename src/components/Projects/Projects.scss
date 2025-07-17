@@ -2,7 +2,8 @@
 
 .projects {
   padding: $spacing-xxl 0;
-  background: linear-gradient(180deg, $white 0%, $light-beige 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(245, 236, 223, 0.8) 100%);
+  position: relative;
 
   &__title {
     font-family: $font-heading;
@@ -171,6 +172,25 @@
     &:hover {
       background: rgba(139, 115, 85, 0.2);
       border-color: rgba(139, 115, 85, 0.3);
+    }
+  }
+
+  &__read-more-link {
+    color: $accent-brown;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all $transition-smooth;
+    margin-top: $spacing-sm;
+    display: inline-block;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: darken($accent-brown, 10%);
+      text-decoration-color: $accent-brown;
+      transform: translateX(2px);
     }
   }
 }

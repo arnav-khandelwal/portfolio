@@ -256,6 +256,9 @@ const Projects = () => {
                       </span>
                     ))}
                   </div>
+                  <span className="projects__read-more-link">
+                    Read More →
+                  </span>
                 </div>
               </div>
             ))}

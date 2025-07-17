@@ -14,7 +14,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, $light-beige 0%, $primary-beige 50%, $medium-beige 100%);
+    background: linear-gradient(135deg, rgba(245, 236, 223, 0.8) 0%, rgba(237, 220, 194, 0.8) 50%, rgba(215, 189, 152, 0.8) 100%);
     
     &::before {
       content: '';

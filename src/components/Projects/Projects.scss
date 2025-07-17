@@ -37,6 +37,7 @@
     @media (max-width: $mobile) {
       grid-template-columns: 1fr;
       gap: $spacing-lg;
+      padding: 0 $spacing-md;
     }
   }
 
@@ -506,6 +507,48 @@
 
     &__features {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: $mobile) {
+    padding: $spacing-sm;
+
+    &__content {
+      border-radius: 20px;
+      max-height: 95vh;
+      margin: $spacing-sm;
+    }
+
+    &__header {
+      padding: $spacing-lg $spacing-md $spacing-sm;
+    }
+
+    &__title {
+      font-size: 1.5rem;
+    }
+
+    &__body {
+      padding: 0 $spacing-md $spacing-sm;
+    }
+
+    &__footer {
+      padding: $spacing-sm $spacing-md $spacing-md;
+      flex-direction: column;
+      gap: $spacing-sm;
+    }
+
+    &__visit-btn,
+    &__close-btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    &__close {
+      top: $spacing-sm;
+      right: $spacing-sm;
+      width: 32px;
+      height: 32px;
+      font-size: 1.2rem;
     }
   }
 }

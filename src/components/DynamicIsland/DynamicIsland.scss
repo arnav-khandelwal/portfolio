@@ -214,6 +214,12 @@
     height: 50px;
     min-width: 50px;
     border-radius: 25px;
+    bottom: 20px;
+    
+    &.expanded {
+      min-width: 300px;
+      margin-left: -150px; // Adjust for mobile width
+    }
     
     &__hamburger {
       width: 50px;

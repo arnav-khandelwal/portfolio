@@ -38,6 +38,11 @@
       grid-template-columns: 1fr;
       gap: $spacing-xl;
     }
+
+    @media (max-width: $mobile) {
+      padding: 0 $spacing-md;
+      gap: $spacing-lg;
+    }
   }
 
   &__form {
@@ -46,6 +51,11 @@
     border-radius: 25px;
     box-shadow: 0 15px 35px rgba(139, 115, 85, 0.1);
     border: 1px solid rgba(139, 115, 85, 0.1);
+
+    @media (max-width: $mobile) {
+      padding: $spacing-lg;
+      border-radius: 20px;
+    }
   }
 
   &__form-group {

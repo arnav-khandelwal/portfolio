@@ -85,6 +85,14 @@ const GlobalBackground = () => {
     camera.position.set(0, 0, 15);
     camera.lookAt(0, 0, 0);
 
+    // Adjust for mobile devices
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      // Scale down the atom for mobile performance
+      atomGroup.scale.setScalar(0.7);
+      camera.position.set(0, 0, 12);
+    }
+
     // Animation loop with slower movement
     const animate = () => {
       requestAnimationFrame(animate);
@@ -121,6 +129,15 @@ const GlobalBackground = () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        // Adjust atom scale and camera position for mobile
+        const isMobile = window.innerWidth <= 768;
+        if (atomGroup) {
+          atomGroup.scale.setScalar(isMobile ? 0.7 : 1);
+        }
+        if (camera) {
+          camera.position.z = isMobile ? 12 : 15;
+        }
       }
     };
 

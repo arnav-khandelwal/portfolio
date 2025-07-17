@@ -37,6 +37,7 @@
     @media (max-width: $mobile) {
       grid-template-columns: 1fr;
       gap: $spacing-md;
+      padding: 0 $spacing-md;
     }
   }
 

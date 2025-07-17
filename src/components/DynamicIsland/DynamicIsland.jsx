@@ -17,20 +17,47 @@ const DynamicIsland = () => {
 
   useEffect(() => {
     const island = islandRef.current;
+    const hamburger = hamburgerRef.current;
+    const menuItems = menuItemsRef.current.children;
 
-    // Initial animation
+    // Set initial state - ensure island starts collapsed
+    gsap.set(island, { width: "60px", minWidth: "60px" });
+    
+    // Ensure hamburger lines are in default position on mount
+    if (hamburger) {
+      gsap.set(hamburger.children[0], { rotation: 0, y: 0 });
+      gsap.set(hamburger.children[1], { opacity: 1, scaleX: 1 });
+      gsap.set(hamburger.children[2], { rotation: 0, y: 0 });
+    }
+
+    // Ensure menu items are completely hidden initially
+    gsap.set(menuItems, { opacity: 0, display: "none" });
+
+    // Enhanced initial animation - pop out from bottom
     gsap.fromTo(island,
-      { y: 100, opacity: 1, scale: 0.8 },
-      { y: 0, opacity: 1, scale: 1, duration: 1, ease: "back.out(1.7)", delay: 2 }
+      { y: 150, opacity: 0, scale: 0.3, rotationX: -90 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        scale: 1, 
+        rotationX: 0,
+        duration: 1.2, 
+        ease: "back.out(2)", 
+        delay: 1.5,
+        transformOrigin: "center center"
+      }
     );
 
-    // Floating animation
+    // Enhanced floating animation with more organic movement
     gsap.to(island, {
-      y: -5,
-      duration: 2,
-      ease: "power1.inOut",
+      y: -6,
+      rotation: 0.5,
+      duration: 3,
+      ease: "sine.inOut",
       yoyo: true,
-      repeat: -1
+      repeat: -1,
+      delay: 2.7,
+      transformOrigin: "center center"
     });
   }, []);
 
@@ -43,93 +70,141 @@ const DynamicIsland = () => {
       // Expand the island
       setIsExpanded(true);
       
-      // Animate island expansion
+      // Kill floating animation during expansion
+      gsap.killTweensOf(island);
+      
+      // Show menu items first (but keep them invisible)
+      gsap.set(menuItems, { display: "flex", opacity: 0 });
+      
+      // Animate menu items with enhanced effects FIRST
+      gsap.fromTo(menuItems,
+        { 
+          opacity: 0, 
+          y: 40, 
+          x: -20, 
+          scale: 0.4, 
+          rotationY: -25,
+          filter: "blur(10px)"
+        },
+        {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          scale: 1,
+          rotationY: 0,
+          filter: "blur(0px)",
+          duration: 1.0,
+          stagger: 0.12,
+          ease: "back.out(1.7)",
+          delay: 0.3
+        }
+      );
+
+      // THEN animate island expansion (after menu items are visible)
       gsap.to(island, {
         width: "auto",
-        minWidth: "420px",
-        duration: 0.8,
-        ease: "power3.out"
+        minWidth: "520px",
+        duration: 1.0,
+        ease: "power2.out",
+        delay: 0.2,
+        onComplete: () => {
+          // Resume floating after expansion
+          gsap.to(island, {
+            y: -6,
+            rotation: 0.5,
+            duration: 3,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            transformOrigin: "center center"
+          });
+        }
       });
 
-      // Animate hamburger lines with smoother timing
-      const tl = gsap.timeline();
+      // Smooth hamburger to cross transformation
+      const tl = gsap.timeline({ delay: 0.1 });
       tl.to(hamburger.children[0], {
         rotation: 45,
         y: 6,
-        duration: 0.4,
-        ease: "power2.out"
+        duration: 0.6,
+        ease: "back.out(1.4)"
       })
       .to(hamburger.children[1], {
         opacity: 0,
         scaleX: 0,
-        duration: 0.3,
+        duration: 0.4,
         ease: "power2.out"
-      }, "<")
+      }, "<0.1")
       .to(hamburger.children[2], {
         rotation: -45,
         y: -6,
-        duration: 0.4,
-        ease: "power2.out"
+        duration: 0.6,
+        ease: "back.out(1.4)"
       }, "<");
-
-      // Animate menu items with enhanced stagger
-      gsap.fromTo(menuItems,
-        { opacity: 0, x: -40, scale: 0.6, rotationY: -15 },
-        {
-          opacity: 1,
-          x: 0,
-          scale: 1,
-          rotationY: 0,
-          duration: 0.7,
-          stagger: 0.08,
-          ease: "back.out(1.4)",
-          delay: 0.4
-        }
-      );
     } else {
       // Collapse the island
       setIsExpanded(false);
 
-      // Animate menu items out with enhanced effect
+      // Kill floating animation during collapse
+      gsap.killTweensOf(island);
+
+      // First animate menu items out smoothly
       gsap.to(menuItems, {
         opacity: 0,
+        y: 30,
         x: -30,
         scale: 0.7,
-        rotationY: 15,
-        duration: 0.4,
-        stagger: 0.04,
+        rotationY: 20,
+        filter: "blur(6px)",
+        duration: 0.6,
+        stagger: 0.05,
         ease: "power2.in"
       });
 
-      // Animate hamburger lines back with smoother timing
-      const tl = gsap.timeline({ delay: 0.3 });
+      // Then collapse island width AFTER menu items fade
+      gsap.to(island, {
+        width: "60px",
+        minWidth: "60px",
+        duration: 0.8,
+        ease: "power2.inOut",
+        delay: 0.4,
+        onComplete: () => {
+          // Hide menu items after island collapse
+          gsap.set(menuItems, { display: "none" });
+          
+          // Resume floating after collapse
+          gsap.to(island, {
+            y: -6,
+            rotation: 0.5,
+            duration: 3,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            transformOrigin: "center center"
+          });
+        }
+      });
+
+      // Smooth cross to hamburger transformation
+      const tl = gsap.timeline({ delay: 0.2 });
       tl.to(hamburger.children[0], {
         rotation: 0,
         y: 0,
-        duration: 0.4,
-        ease: "power2.out"
+        duration: 0.6,
+        ease: "back.out(1.4)"
       })
       .to(hamburger.children[1], {
         opacity: 1,
         scaleX: 1,
-        duration: 0.3,
-        ease: "power2.out"
-      }, "<")
+        duration: 0.4,
+        ease: "back.out(1.4)"
+      }, "<0.1")
       .to(hamburger.children[2], {
         rotation: 0,
         y: 0,
-        duration: 0.4,
-        ease: "power2.out"
-      }, "<");
-
-      // Collapse island
-      gsap.to(island, {
-        width: "60px",
-        minWidth: "60px",
         duration: 0.6,
-        ease: "power3.in",
-        delay: 0.3
-      });
+        ease: "back.out(1.4)"
+      }, "<");
     }
   };
 

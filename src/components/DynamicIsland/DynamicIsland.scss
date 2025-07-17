@@ -4,8 +4,12 @@
   position: fixed;
   bottom: 30px;
   left: 50%;
-  transform: translateX(-50%);
+  margin-left: -30px; // Half of initial width (60px) for centering
   z-index: 1000;
+  
+  // Initial collapsed state
+  width: 60px;
+  height: 60px;
   
   // Remove main container background and sizing
   background: none;
@@ -17,32 +21,33 @@
   gap: 15px;
   padding: 0;
   
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  // Enhanced transforms for better animations
+  transform-style: preserve-3d;
+  perspective: 2000px;
+  will-change: transform, width, margin-left;
+  
+  // Smoother width transitions
+  transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              margin-left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  // When expanded, allow auto width with smooth transition and adjust centering
+  &.expanded {
+    width: auto;
+    min-width: 520px;
+    margin-left: -260px; // Half of expanded width for centering
+  }
 
   // Floating block styles
   .floating-block {
     background: rgba(45, 45, 45, 0.98);
-    // backdrop-filter: blur(25px);
     border-radius: 30px;
     border: 1.5px solid rgba(255, 255, 255, 0.12);
-    
-    // box-shadow: 
-    //   0 10px 40px rgba(0, 0, 0, 0.4),
-    //   0 4px 15px rgba(0, 0, 0, 0.3),
-    //   inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    //   inset 0 -1px 0 rgba(0, 0, 0, 0.2);
     
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     &:hover {
-      box-shadow: 
-        0 15px 50px rgba(0, 0, 0, 0.5),
-        0 6px 20px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
-      
       border-color: rgba(255, 255, 255, 0.18);
-      transform: translateY(-2px);
+      transform: translateY(-5px);
     }
   }
 
@@ -53,6 +58,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    // Enable smooth transforms
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
   }
 
   .menu-block {
@@ -62,6 +71,11 @@
     align-items: center;
     justify-content: center;
     min-width: 120px;
+    
+    // Enable 3D transforms for better animations
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    will-change: transform, opacity, filter;
   }
 
   &__hamburger {
@@ -109,13 +123,13 @@
   }
 
   &__menu {
-    display: flex;
+    display: none; // Completely hidden initially
     gap: 15px;
     opacity: 0;
-    overflow: hidden;
     
-    // Ensure menu is visible when expanded
+    // Show and make visible when expanded
     .dynamic-island.expanded & {
+      display: flex;
       opacity: 1;
     }
   }
@@ -142,6 +156,7 @@
     .dynamic-island.expanded & {
       opacity: 1;
     }
+
     &:active {
       background: rgba(255, 255, 255, 0.12);
       transform: scale(0.95);
@@ -231,18 +246,4 @@
       font-size: 0.9rem;
     }
   }
-}
-
-// Enhanced floating animation
-@keyframes float {
-  0%, 100% {
-    transform: translateX(-50%) translateY(0px);
-  }
-  50% {
-    transform: translateX(-50%) translateY(-3px);
-  }
-}
-
-.dynamic-island {
-  animation: float 4s ease-in-out infinite;
 }

@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Hero.scss';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -16,39 +19,114 @@ const Hero = () => {
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.5 });
 
-    // Background animation
+    // Background animation with ScrollTrigger
     gsap.fromTo(backgroundRef.current,
       { scale: 1.2, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 2, ease: "power2.out" }
+      { 
+        scale: 1, 
+        opacity: 1, 
+        duration: 2, 
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: backgroundRef.current,
+          start: "top 90%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
     );
 
-    // Text animations
-    tl.fromTo(titleRef.current,
+    // Text animations with ScrollTrigger
+    gsap.fromTo(titleRef.current,
       { y: 100, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.2, ease: "power3.out" }
-    )
-    .fromTo(subtitleRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power2.out" }, "-=0.5"
-    )
-    .fromTo(descriptionRef.current,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, "-=1"
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 1.2, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 90%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
     );
 
-    // Button animation starting with title
+    gsap.fromTo(subtitleRef.current,
+      { y: 50, opacity: 0 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 1, 
+        ease: "power2.out",
+        delay: 0.2,
+        scrollTrigger: {
+          trigger: subtitleRef.current,
+          start: "top 90%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
+    );
+
+    gsap.fromTo(descriptionRef.current,
+      { y: 30, opacity: 0 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        ease: "power2.out",
+        delay: 0.4,
+        scrollTrigger: {
+          trigger: descriptionRef.current,
+          start: "top 90%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
+    );
+
+    // Button animation with ScrollTrigger
     gsap.fromTo(ctaRef.current,
       { y: 30, opacity: 0, scale: 0.8, rotationX: -15 },
-      { y: 0, opacity: 1, scale: 1, rotationX: 0, duration: 1.2, ease: "power2.out", delay: 0.5 }
+      { 
+        y: 0, 
+        opacity: 1, 
+        scale: 1, 
+        rotationX: 0, 
+        duration: 1.2, 
+        ease: "power2.out", 
+        delay: 0.6,
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: "top 90%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
     );
 
-    // Widget animations
+    // Widget animations with ScrollTrigger
     gsap.fromTo(widgetRef.current,
       { x: 100, opacity: 0, scale: 0.8 },
-      { x: 0, opacity: 1, scale: 1, duration: 1.5, ease: "power3.out", delay: 1 }
+      { 
+        x: 0, 
+        opacity: 1, 
+        scale: 1, 
+        duration: 1.5, 
+        ease: "power3.out", 
+        delay: 0.8,
+        scrollTrigger: {
+          trigger: widgetRef.current,
+          start: "top 90%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
+        }
+      }
     );
 
-    // Animate floating orbs
+    // Animate floating orbs with ScrollTrigger
     orbsRef.current.forEach((orb, index) => {
       if (orb) {
         gsap.fromTo(orb,
@@ -58,7 +136,13 @@ const Hero = () => {
             opacity: 0.8, 
             duration: 0.8, 
             ease: "back.out(1.7)", 
-            delay: 1.5 + (index * 0.2) 
+            delay: 1 + (index * 0.2),
+            scrollTrigger: {
+              trigger: orb,
+              start: "top 90%",
+              end: "bottom 20%",
+              toggleActions: "play reverse play reverse"
+            }
           }
         );
         
@@ -77,10 +161,22 @@ const Hero = () => {
     // Card hover effect setup
     const card = cardRef.current;
     if (card) {
-      // Initial card animation
+      // Initial card animation with ScrollTrigger
       gsap.fromTo(card,
         { rotationY: -15, scale: 0.9 },
-        { rotationY: 0, scale: 1, duration: 1.2, ease: "power2.out", delay: 1.2 }
+        { 
+          rotationY: 0, 
+          scale: 1, 
+          duration: 1.2, 
+          ease: "power2.out", 
+          delay: 1,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+            end: "bottom 20%",
+            toggleActions: "play reverse play reverse"
+          }
+        }
       );
 
       // Mouse move effect

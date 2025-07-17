@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { MdEmail, MdPhone, MdLocationOn } from 'react-icons/md';
+import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
 import './Contact.scss';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -34,6 +36,8 @@ const Contact = () => {
         scrollTrigger: {
           trigger: section,
           start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
         }
       }
     );
@@ -49,6 +53,8 @@ const Contact = () => {
         scrollTrigger: {
           trigger: section,
           start: "top 70%",
+          end: "bottom 30%",
+          toggleActions: "play reverse play reverse"
         }
       }
     );
@@ -64,6 +70,8 @@ const Contact = () => {
         scrollTrigger: {
           trigger: section,
           start: "top 70%",
+          end: "bottom 30%",
+          toggleActions: "play reverse play reverse"
         }
       }
     );
@@ -141,21 +149,21 @@ const Contact = () => {
           
           <div ref={contactInfoRef} className="contact__info">
             <div className="contact__info-item">
-              <span className="contact__info-icon">📧</span>
+              <MdEmail className="contact__info-icon" />
               <div>
                 <h4>Email</h4>
                 <p>your.email@example.com</p>
               </div>
             </div>
             <div className="contact__info-item">
-              <span className="contact__info-icon">📱</span>
+              <MdPhone className="contact__info-icon" />
               <div>
                 <h4>Phone</h4>
                 <p>+1 (555) 123-4567</p>
               </div>
             </div>
             <div className="contact__info-item">
-              <span className="contact__info-icon">📍</span>
+              <MdLocationOn className="contact__info-icon" />
               <div>
                 <h4>Location</h4>
                 <p>City, Country</p>
@@ -164,9 +172,18 @@ const Contact = () => {
             <div className="contact__social">
               <h4>Follow Me</h4>
               <div className="contact__social-links">
-                <a href="#" className="contact__social-link">LinkedIn</a>
-                <a href="#" className="contact__social-link">GitHub</a>
-                <a href="#" className="contact__social-link">Twitter</a>
+                <a href="#" className="contact__social-link">
+                  <FaLinkedin className="contact__social-icon" />
+                  LinkedIn
+                </a>
+                <a href="#" className="contact__social-link">
+                  <FaGithub className="contact__social-icon" />
+                  GitHub
+                </a>
+                <a href="#" className="contact__social-link">
+                  <FaTwitter className="contact__social-icon" />
+                  Twitter
+                </a>
               </div>
             </div>
           </div>

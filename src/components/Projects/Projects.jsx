@@ -198,6 +198,8 @@ const Projects = () => {
         scrollTrigger: {
           trigger: section,
           start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
         }
       }
     );
@@ -215,6 +217,8 @@ const Projects = () => {
         scrollTrigger: {
           trigger: projectsRef.current,
           start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
         }
       }
     );

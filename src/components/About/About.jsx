@@ -109,6 +109,8 @@ const AboutWidget = ({ onOpenExperienceModal }) => {
         scrollTrigger: {
           trigger: widgetContainerRef.current,
           start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
         }
       }
     );
@@ -124,6 +126,8 @@ const AboutWidget = ({ onOpenExperienceModal }) => {
         scrollTrigger: {
           trigger: widgetContainerRef.current,
           start: "top 70%",
+          end: "bottom 30%",
+          toggleActions: "play reverse play reverse"
         }
       }
     );
@@ -297,6 +301,7 @@ const About = () => {
           trigger: section,
           start: "top 80%",
           end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
         }
       }
     );
@@ -320,6 +325,7 @@ const About = () => {
           trigger: section,
           start: "top 70%",
           end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
         }
       }
     );
@@ -336,6 +342,7 @@ const About = () => {
           trigger: section,
           start: "top 70%",
           end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
         }
       }
     );
@@ -360,6 +367,7 @@ const About = () => {
           trigger: statsRef.current,
           start: "top 85%",
           end: "bottom 20%",
+          toggleActions: "play reverse play reverse"
         }
       }
     );

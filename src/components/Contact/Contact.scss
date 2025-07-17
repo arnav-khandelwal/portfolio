@@ -165,6 +165,12 @@
     &:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 35px rgba(139, 115, 85, 0.2);
+
+      .contact__info-icon {
+        background: $accent-brown;
+        color: $white !important;
+        transform: scale(1.1);
+      }
     }
 
     h4 {
@@ -183,6 +189,18 @@
   &__info-icon {
     font-size: 1.5rem;
     flex-shrink: 0;
+    color: $accent-brown !important;
+    background: rgba(139, 115, 85, 0.1);
+    padding: $spacing-sm;
+    border-radius: 12px;
+    transition: all $transition-smooth;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
   }
 
   &__social {
@@ -222,12 +240,24 @@
     font-size: 0.9rem;
     transition: all $transition-smooth;
     border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
 
     &:hover {
       background: $accent-brown;
       color: $white;
       transform: translateY(-2px);
       border-color: $accent-brown;
+
+      .contact__social-icon {
+        transform: scale(1.1);
+      }
     }
+  }
+
+  &__social-icon {
+    font-size: 1rem;
+    transition: transform $transition-smooth;
   }
 }

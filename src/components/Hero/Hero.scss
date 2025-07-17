@@ -28,11 +28,19 @@
     }
   }
 
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-xl;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+  }
+
   &__content {
     position: relative;
     z-index: 2;
-    text-align: center;
-    max-width: 800px;
+    text-align: left;
   }
 
   &__title {
@@ -78,9 +86,7 @@
     color: $text-light;
     margin-bottom: $spacing-xl;
     line-height: 1.8;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 500px;
   }
 
   &__cta {
@@ -133,6 +139,160 @@
     font-size: 1.3rem;
     transition: transform $transition-smooth;
   }
+
+  // Interactive Widget Styles
+  &__widget {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+  }
+
+  &__card {
+    position: relative;
+    width: 350px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    box-shadow: 0 20px 40px rgba(139, 115, 85, 0.1);
+    transition: all $transition-smooth;
+
+    &:hover {
+      box-shadow: 0 30px 60px rgba(139, 115, 85, 0.2);
+    }
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: $spacing-md;
+    background: rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__card-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+
+    &--red {
+      background: #ff5f57;
+    }
+
+    &--yellow {
+      background: #ffbd2e;
+    }
+
+    &--green {
+      background: #28ca42;
+    }
+  }
+
+  &__card-content {
+    padding: $spacing-lg;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  &__code-line {
+    margin-bottom: 8px;
+    
+    &--indent {
+      margin-left: 20px;
+    }
+  }
+
+  &__code-keyword {
+    color: $accent-brown;
+    font-weight: 600;
+  }
+
+  &__code-variable {
+    color: $dark-beige;
+  }
+
+  &__code-operator {
+    color: $text-light;
+  }
+
+  &__code-string {
+    color: #2d5a27;
+  }
+
+  &__code-function {
+    color: $accent-brown;
+    font-weight: 500;
+  }
+
+  &__code-bracket {
+    color: $text-light;
+  }
+
+  &__orbs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  &__orb {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(139, 115, 85, 0.6), rgba(101, 81, 58, 0.4));
+    box-shadow: 0 10px 20px rgba(139, 115, 85, 0.2);
+    backdrop-filter: blur(10px);
+
+    &--1 {
+      width: 60px;
+      height: 60px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    &--2 {
+      width: 40px;
+      height: 40px;
+      top: 60%;
+      left: 80%;
+      animation-delay: 0.5s;
+    }
+
+    &--3 {
+      width: 80px;
+      height: 80px;
+      top: 10%;
+      right: 15%;
+      animation-delay: 1s;
+    }
+
+    &--4 {
+      width: 30px;
+      height: 30px;
+      bottom: 30%;
+      left: 20%;
+      animation-delay: 1.5s;
+    }
+
+    &--5 {
+      width: 50px;
+      height: 50px;
+      bottom: 20%;
+      right: 25%;
+      animation-delay: 2s;
+    }
+  }
 }
 
 @keyframes rotate {
@@ -150,10 +310,76 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .hero {
+    &__wrapper {
+      gap: $spacing-lg;
+    }
+
+    &__card {
+      width: 300px;
+      height: 350px;
+    }
+
+    &__card-content {
+      font-size: 13px;
+    }
+  }
+}
+
 @media (max-width: $mobile) {
   .hero {
+    &__wrapper {
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+      text-align: center;
+    }
+
     &__content {
-      padding: 0 $spacing-sm;
+      text-align: center;
+      order: 2;
+    }
+
+    &__widget {
+      order: 1;
+      height: 300px;
+    }
+
+    &__card {
+      width: 280px;
+      height: 320px;
+    }
+
+    &__card-content {
+      padding: $spacing-md;
+      font-size: 12px;
+    }
+
+    &__orb {
+      &--1 {
+        width: 40px;
+        height: 40px;
+      }
+
+      &--2 {
+        width: 30px;
+        height: 30px;
+      }
+
+      &--3 {
+        width: 50px;
+        height: 50px;
+      }
+
+      &--4 {
+        width: 25px;
+        height: 25px;
+      }
+
+      &--5 {
+        width: 35px;
+        height: 35px;
+      }
     }
 
     &__cta {

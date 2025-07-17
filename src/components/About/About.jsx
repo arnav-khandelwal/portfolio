@@ -32,70 +32,66 @@ const AboutWidget = ({ onOpenExperienceModal }) => {
   };
 
   const educationData = [
-    {
-      year: '2020-2024',
-      title: 'Bachelor of Computer Science',
-      institution: 'University of Technology',
-      description: 'Specialized in Software Engineering with focus on web technologies and algorithms.',
-      gpa: '3.8/4.0'
-    },
-    {
-      year: '2018-2020',
-      title: 'High School Diploma',
-      institution: 'Tech Preparatory School',
-      description: 'Advanced courses in Mathematics, Computer Science, and Physics.',
-      achievements: 'Valedictorian, Computer Science Award'
-    }
-  ];
+  {
+    year: '2023-2027',
+    title: 'B.Tech in Computer Science',
+    institution: 'Jaypee Institute Of Information Technology, Noida',
+    gpa: '8.5/10'
+  },
+  {
+    year: '2009-2023',
+    title: 'High School',
+    institution: 'DPS Indirapuram, Ghaziabad',
+    achievements: 'Class XII: 93.8%, Class X: 93.4%'
+  }
+];
 
   const experienceData = [
-    {
-      year: '2024-Present',
-      title: 'Frontend Developer',
-      company: 'Tech Innovation Corp',
-      description: 'Developing modern web applications using React, TypeScript, and GSAP animations.',
-      fullDescription: 'Leading frontend development for cutting-edge web applications at Tech Innovation Corp. Responsible for architecting scalable React applications, implementing complex animations with GSAP, and ensuring optimal performance across all devices. Collaborated closely with design teams to bring creative visions to life while maintaining code quality and best practices.',
-      technologies: ['React', 'TypeScript', 'GSAP', 'SCSS'],
-      achievements: [
-        'Improved application performance by 40% through code optimization',
-        'Led the development of 5 major product features',
-        'Mentored 2 junior developers',
-        'Implemented comprehensive testing strategy',
-        'Reduced bug reports by 60% through quality improvements'
-      ],
-      responsibilities: [
-        'Architecting and developing complex React applications',
-        'Creating smooth animations and micro-interactions',
-        'Collaborating with UI/UX designers and backend developers',
-        'Code reviews and maintaining coding standards',
-        'Performance optimization and cross-browser compatibility'
-      ],
-      location: 'San Francisco, CA',
-      type: 'Full-time'
-    },
-    {
-      year: '2023-2024',
-      title: 'Web Developer Intern',
-      company: 'Creative Digital Agency',
-      description: 'Built responsive websites and collaborated on UI/UX design projects.',
-      fullDescription: 'Gained hands-on experience in web development at a fast-paced digital agency. Worked on diverse client projects ranging from small business websites to large-scale web applications. Learned industry best practices and collaborated with senior developers on challenging technical problems.',
-      technologies: ['HTML', 'CSS', 'JavaScript', 'Vue.js'],
-      achievements: [
-        'Successfully delivered 10+ client projects',
-        'Received outstanding intern evaluation',
-        'Contributed to agency\'s design system',
-        'Improved website loading speeds by 30%'
-      ],
-      responsibilities: [
-        'Developing responsive websites for various clients',
-        'Implementing UI designs with pixel-perfect accuracy',
-        'Testing and debugging across multiple browsers',
-        'Participating in client meetings and project planning'
-      ],
-      location: 'New York, NY',
-      type: 'Internship'
-    }
-  ];
+  {
+    year: 'June 2025 – Present',
+    title: 'Flutter App Developer',
+    company: 'Menoob (Remote)',
+    fullDescription:
+      'Building a cross-platform mobile app using Flutter and Firebase for seamless real-time sync across 500+ users. Integrating Razorpay API for secure payments and using Provider for state management, improving performance and reducing rebuild cycles.',
+    technologies: ['Flutter', 'Dart', 'Firebase', 'Github', 'Razorpay API', 'Provider'],
+    achievements: [
+      'Delivered a cross-platform app used by 500+ users',
+      'Integrated secure payment flow with Razorpay API',
+      'Improved app performance by 30% through state management optimization',
+      'Developed reusable Flutter widgets to improve code maintainability and consistency'
+    ],
+    responsibilities: [
+      'Developing and maintaining a cross-platform Flutter application',
+      'Implementing secure payment gateways with Razorpay API',
+      'Managing app state efficiently using Provider',
+      'Optimizing performance and ensuring smooth user experience',
+      'Collaborating remotely with the product team'
+    ],
+    location: 'Remote',
+    type: 'Internship'
+  },
+  {
+    year: 'Mar 2025 – June 2025',
+    title: 'Web Development Intern',
+    company: 'Mad Marketing Club (Remote)',
+    fullDescription:
+      'Developed a company website using React.js, improving page load speed by 40% via code splitting and lazy loading. Built a CRM using the MERN stack with authentication, lead tracking, and role-based access. Created a real-time analytics dashboard to reduce manual work by 70%.',
+    technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Github', 'SCSS'],
+    achievements: [
+      'Improved website performance by 40% using code splitting and lazy loading',
+      'Built a full-featured CRM with role-based access control',
+      'Developed a real-time analytics dashboard reducing manual tasks by 70%',
+      'Delivered a production-ready websites for the company'
+    ],
+    responsibilities: [
+      'Collaborated with other developers to create the official company website using React.js, ensuring fast load times and a seamless user experience',
+      'Developed a production-ready CRM platform using the MERN stack as a product for the company to sell to clients',
+      'Helped create websites for various businesses, improving their online presence',
+    ],
+    location: 'Remote',
+    type: 'Internship'
+  }
+];
 
   useEffect(() => {
     // Animate timeline entrance
@@ -388,27 +384,27 @@ const About = () => {
           <h2 ref={titleRef} className="about__title">About Me</h2>
           <div ref={contentRef} className="about__content">
             <p className="about__description">
-              I'm a passionate developer with a keen eye for design and a love for creating 
-              meaningful digital experiences. With expertise in modern web technologies, 
-              I bridge the gap between creative vision and technical implementation.
+              Hey, I’m Arnav! I’m a developer who loves turning random ideas into actual working apps (most of the time xD). 
+              I enjoy blending good design with clean, functional code — because what’s the 
+              point of an app if it looks pretty but breaks on click, right?
             </p>
             <p className="about__description">
-              My journey in web development started with curiosity and has evolved into 
-              a profession driven by continuous learning and innovation. I believe in 
-              writing clean, efficient code that not only works but tells a story.
+              I started coding out of pure curiosity, and before I knew it, 
+              I was stuck in the endless loop of learn → build → mess up → fix → repeat. 
+              Now, I spend my time creating web and mobile apps that (hopefully) make life a little easier.
             </p>
             <div ref={statsRef} className="about__stats">
               <div className="about__stat">
-                <span className="about__stat-number">50+</span>
+                <span className="about__stat-number">15+</span>
                 <span className="about__stat-label">Projects Completed</span>
               </div>
               <div className="about__stat">
-                <span className="about__stat-number">3+</span>
+                <span className="about__stat-number">2+</span>
                 <span className="about__stat-label">Years Experience</span>
               </div>
               <div className="about__stat">
-                <span className="about__stat-number">100%</span>
-                <span className="about__stat-label">Client Satisfaction</span>
+                <span className="about__stat-number">500+</span>
+                <span className="about__stat-label">Leetcode Questions</span>
               </div>
             </div>
           </div>

@@ -151,7 +151,7 @@
 
   &__card {
     position: relative;
-    width: 350px;
+    width: 400px;
     height: 400px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
@@ -200,14 +200,42 @@
     padding: $spacing-lg;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.8;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.05));
+    position: relative;
+
   }
 
   &__code-line {
     margin-bottom: 8px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    position: relative;
+    
+    &:hover {
+      background: rgba(139, 115, 85, 0.05);
+      transform: translateX(2px);
+    }
     
     &--indent {
       margin-left: 20px;
+    }
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 0;
+      background: linear-gradient(135deg, $accent-brown, $dark-beige);
+      transition: height 0.3s ease;
+    }
+    
+    &:hover::before {
+      height: 80%;
     }
   }
 
@@ -235,6 +263,34 @@
 
   &__code-bracket {
     color: $text-light;
+  }
+
+  &__code-comment {
+    color: #6a994e;
+    font-style: italic;
+    opacity: 0.8;
+    font-weight: 400;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(106, 153, 78, 0.1);
+      transition: width 0.3s ease;
+    }
+    
+    &:hover {
+      opacity: 1;
+      color: #588c3e;
+      
+      &::before {
+        width: 100%;
+      }
+    }
   }
 
   &__orbs {
@@ -310,6 +366,17 @@
   }
 }
 
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
 @media (max-width: 1024px) {
   .hero {
     &__wrapper {
@@ -359,26 +426,36 @@
       &--1 {
         width: 40px;
         height: 40px;
+        top: 15%;
+        left: 5%;
       }
 
       &--2 {
         width: 30px;
         height: 30px;
+        top: 12%;
+        right: 8%;
       }
 
       &--3 {
         width: 50px;
         height: 50px;
+        top: 8%;
+        right: 10%;
       }
 
       &--4 {
         width: 25px;
         height: 25px;
+        bottom: 25%;
+        left: 8%;
       }
 
       &--5 {
         width: 35px;
         height: 35px;
+        bottom: 15%;
+        right: 12%;
       }
     }
 

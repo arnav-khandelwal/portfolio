@@ -240,12 +240,13 @@ const Hero = () => {
         <div className="hero__wrapper">
           <div ref={heroRef} className="hero__content">
             <h1 ref={titleRef} className="hero__title">
-              Hello, I'm <span>Arnav</span>
+              Hello, I'm <span>Arnav Khandelwal</span>
             </h1>
-            <h2 ref={subtitleRef} className="hero__subtitle">Creative Developer & Designer</h2>
+            <h2 ref={subtitleRef} className="hero__subtitle">Creative Developer & Problem Solver</h2>
             <p ref={descriptionRef} className="hero__description">
-              I craft digital experiences that blend creativity with functionality,
-              bringing ideas to life through elegant code and thoughtful design.
+              I craft scalable full‑stack web applications and cross‑platform mobile apps that combine creativity, 
+              functionality, and performance—turning ideas into seamless digital experiences.
+
             </p>
             <button ref={ctaRef} className="hero__cta" onClick={handleScrollToProjects}>
               View My Work
@@ -262,23 +263,16 @@ const Hero = () => {
               </div>
               <div className="hero__card-content">
                 <div className="hero__code-line">
-                  <span className="hero__code-keyword">const</span>
-                  <span className="hero__code-variable"> developer</span>
-                  <span className="hero__code-operator"> = </span>
-                  <span className="hero__code-string">'creative'</span>
+                  <span className="hero__code-comment">git commit -m "final commit"</span>
                 </div>
                 <div className="hero__code-line">
-                  <span className="hero__code-keyword">function</span>
-                  <span className="hero__code-function"> buildAmazing</span>
-                  <span className="hero__code-bracket">()</span>
-                  <span className="hero__code-bracket"> {'{'}</span>
-                </div>
-                <div className="hero__code-line hero__code-line--indent">
-                  <span className="hero__code-keyword">return</span>
-                  <span className="hero__code-string"> 'innovation'</span>
+                  <span className="hero__code-comment">git commit -m "final final commit"</span>
                 </div>
                 <div className="hero__code-line">
-                  <span className="hero__code-bracket">{'}'}</span>
+                  <span className="hero__code-comment">git commit -m "hopefully final commit"</span>
+                </div>
+                <div className="hero__code-line">
+                  <span className="hero__code-comment">git commit -m "this shit will kill me"</span>
                 </div>
               </div>
             </div>

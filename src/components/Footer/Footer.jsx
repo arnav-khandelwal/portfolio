@@ -38,15 +38,15 @@ const Footer = () => {
         <div ref={contentRef} className="footer__content">
           <div className="footer__top">
             <div className="footer__brand">
-              <h3>Portfolio</h3>
-              <p>Creating digital experiences with passion and precision.</p>
+              <h3>Arnav Khandelwal's Portfolio</h3>
+              <p>Made with unhealthy amounts of coffee and way too many commits.</p>
             </div>
             <button className="footer__scroll-top" onClick={scrollToTop}>
               ↑ Back to Top
             </button>
           </div>
           <div className="footer__bottom">
-            <p>&copy; 2025 Arnav Khandelwal. All rights reserved.</p>
+            <p>&copy; 2025 Arnav Khandelwal. <br /> → If you’re a recruiter and reading this, please hire me :D</p>
             <div className="footer__links">
               <a href="#about">About</a>
               <a href="#skills">Skills</a>

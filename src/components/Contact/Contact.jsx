@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MdEmail, MdPhone, MdLocationOn } from 'react-icons/md';
-import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 import './Contact.scss';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -152,37 +153,41 @@ const Contact = () => {
               <MdEmail className="contact__info-icon" />
               <div>
                 <h4>Email</h4>
-                <p>your.email@example.com</p>
+                <p>arnav181104@gmail.com</p>
               </div>
             </div>
             <div className="contact__info-item">
               <MdPhone className="contact__info-icon" />
               <div>
                 <h4>Phone</h4>
-                <p>+1 (555) 123-4567</p>
+                <p>+91 (704) 227-3876</p>
               </div>
             </div>
             <div className="contact__info-item">
               <MdLocationOn className="contact__info-icon" />
               <div>
                 <h4>Location</h4>
-                <p>City, Country</p>
+                <p>Delhi, India</p>
               </div>
             </div>
             <div className="contact__social">
               <h4>Follow Me</h4>
               <div className="contact__social-links">
-                <a href="#" className="contact__social-link">
+                <a href="https://www.linkedin.com/in/arnav-khandelwal-7a0aa2278/" className="contact__social-link" target='_blank'>
                   <FaLinkedin className="contact__social-icon" />
                   LinkedIn
                 </a>
-                <a href="#" className="contact__social-link">
+                <a href="https://github.com/arnav-khandelwal" className="contact__social-link" target='_blank'>
                   <FaGithub className="contact__social-icon" />
                   GitHub
                 </a>
-                <a href="#" className="contact__social-link">
-                  <FaTwitter className="contact__social-icon" />
-                  Twitter
+                <a href="https://www.instagram.com/_okayarnav_/" className="contact__social-link" target='_blank'>
+                  <FaInstagram className="contact__social-icon" />
+                  Instagram
+                </a>
+                <a href="https://leetcode.com/u/arnav-khandelwal/" className="contact__social-link" target='_blank'>
+                  <SiLeetcode className="contact__social-icon" />
+                  LeetCode
                 </a>
               </div>
             </div>

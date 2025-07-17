@@ -2,14 +2,19 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
-  SiJavascript, 
   SiReact, 
-  SiTypescript, 
   SiNodedotjs, 
   SiSass, 
-  SiPython, 
   SiGit, 
-  SiFigma 
+  SiFigma,
+  SiFlutter,
+  SiDart,
+  SiCplusplus,
+  SiPhp,
+  SiMongodb,
+  SiPostgresql,
+  SiFirebase,
+  SiSwift,
 } from 'react-icons/si';
 import './Skills.scss';
 
@@ -21,15 +26,19 @@ const Skills = () => {
   const skillsRef = useRef(null);
 
   const skills = [
-    { name: 'JavaScript', level: 90, icon: SiJavascript, color: '#F7DF1E' },
-    { name: 'React', level: 85, icon: SiReact, color: '#61DAFB' },
-    { name: 'TypeScript', level: 80, icon: SiTypescript, color: '#3178C6' },
-    { name: 'Node.js', level: 75, icon: SiNodedotjs, color: '#339933' },
-    { name: 'CSS/SCSS', level: 90, icon: SiSass, color: '#CC6699' },
-    { name: 'Python', level: 70, icon: SiPython, color: '#3776AB' },
-    { name: 'Git', level: 85, icon: SiGit, color: '#F05032' },
-    { name: 'UI/UX Design', level: 75, icon: SiFigma, color: '#F24E1E' }
-  ];
+  { name: 'React', level: 90, icon: SiReact, color: '#61DAFB' },        // Widely used frontend framework
+  { name: 'Node.js', level: 85, icon: SiNodedotjs, color: '#339933' },  // Backend industry standard with JS
+  { name: 'Swift (Learning)', level: 50, icon: SiSwift, color: '#FA7343' }, // Niche, for iOS-specific dev
+  { name: 'Flutter', level: 80, icon: SiFlutter, color: '#02569B' },    // Growing cross-platform mobile dev
+  { name: 'Dart', level: 80, icon: SiDart, color: '#0175C2' },          // Needed for Flutter
+  { name: 'MongoDB', level: 80, icon: SiMongodb, color: '#47A248' },    // Popular NoSQL database
+  { name: 'Git', level: 95, icon: SiGit, color: '#F05032' },            // Essential for version control
+  { name: 'Firebase', level: 75, icon: SiFirebase, color: '#FFCA28' },  // Cloud backend & auth services
+  { name: 'CSS/SCSS', level: 95, icon: SiSass, color: '#CC6699' },      // Must-have styling skill
+  { name: 'C++', level: 90, icon: SiCplusplus, color: '#00599C' },      // Core language (DSA, system-level)
+  { name: 'PHP', level: 70, icon: SiPhp, color: '#777BB4' },            // Legacy but still used in web
+  { name: 'PostgreSQL', level: 75, icon: SiPostgresql, color: '#336791' }, // Highly in-demand SQL DB
+];
 
   useEffect(() => {
     const section = sectionRef.current;

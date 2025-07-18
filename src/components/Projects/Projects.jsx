@@ -15,7 +15,7 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const projects = [
+const projects = [
   {
     title: 'SportsSocial',
     description: 'A full-stack social platform to discover, join, and host events with real-time chat and location filtering.',
@@ -23,7 +23,7 @@ const Projects = () => {
       'SportsSocial is a MERN-based platform that connects players by letting them create, join, and manage sports events. It features real-time chat powered by WebSockets, authentication using JWT, and location-based filtering using PostGIS and Google Maps API. Supabase (PostgreSQL) serves as the scalable backend while the frontend is built with React.js and SCSS for a smooth and responsive UI.',
     technologies: ['React.js', 'Node.js', 'Supabase (PostgreSQL)', 'WebSockets', 'Google Maps API', 'SCSS'],
     link: 'https://sportssocial.netlify.app',
-    github: 'https://github.com/arnav-khandelwal/sportssocial',
+    github: 'https://github.com/arnav-khandelwal/SportsSocial2.0',
     features: [
       'JWT-based user authentication',
       'Real-time chat with WebSockets',
@@ -34,11 +34,28 @@ const Projects = () => {
     ]
   },
   {
+    title: 'GameBoy Dating App',
+    description: 'A retro-themed dating app with a fully interactive GameBoy interface, heart-based matching, and 8-bit pixelated profiles.',
+    fullDescription:
+      'GameBoy Dating App is a nostalgic twist on modern dating, combining Tinder-like swiping with a fully functional GameBoy interface. It features D-pad navigation, pixelated avatars by image processing, authentic retro sound effects, and a unique heart-based matching system. Built with Flutter for cross-platform support, Node.js for backend logic, and Supabase for authentication and database management, it delivers a fun, gamified dating experience with a strong 8-bit aesthetic.',
+    technologies: ['Flutter', 'Dart', 'Node.js', 'Express.js', 'Supabase', 'Railway'],
+    link: 'https://youtube.com/shorts/_ZogtFTygEc',
+    github: 'https://github.com/rudradogra/Gameboy_app',
+    features: [
+      'Fully interactive GameBoy-inspired UI with D-pad and button controls',
+      'Heart-based matching system for strategic swiping',
+      'Retro image processing to create 8-bit pixelated avatars',
+      'Authentic GameBoy sounds with haptic and visual feedback',
+      'Cross-platform support (Android, Web, iOS) via Flutter',
+      'Supabase-powered auth, database, and file storage'
+    ]
+  },
+  {
     title: 'Travel AI',
     description: 'An AI-powered travel planner for booking hotels, flights, and generating personalized itineraries.',
     fullDescription:
       'Travel AI is an AI assistant that helps users plan trips by integrating Gemini API, OpenWeatherMap, Booking.com, and SkyScanner. It reduces planning effort by 80% by automating hotel and flight suggestions, generating custom itineraries, and providing weather-based travel insights. The app is built with React.js and optimized for responsive, modular components.',
-    technologies: ['React.js', 'Gemini API', 'OpenWeatherMap', 'SkyScanner API', 'SCSS'],
+    technologies: ['React.js', 'Gemini API', 'OpenWeatherMap', 'SkyScanner API', 'CSS'],
     link: 'https://travelai-2tdl.onrender.com/',
     github: 'https://github.com/arnav-khandelwal/travel-ai',
     features: [
@@ -50,10 +67,26 @@ const Projects = () => {
     ]
   },
   {
-    title: 'MediVerse',
-    description: 'An AI-powered tool that identifies medicines from images and provides safe usage information.',
+    title: 'War Card Game',
+    description: 'A simple iOS card game built with SwiftUI where the player competes against the computer by dealing random cards.',
     fullDescription:
-      'MediVerse is a health-focused AI web app that identifies medicines using image recognition and provides detailed usage instructions. It integrates Gemini API for AI processing, Akash AI for deep learning, and features a chatbot + prescription analyzer. Built with React.js for the frontend and Express.js for backend API handling.',
+      'War Card Game is a fun, lightweight iOS app built using SwiftUI. Players and the computer deal random cards, and the score updates based on who draws the higher card. The game uses custom card assets and provides a clean, interactive interface. It’s a beginner-friendly SwiftUI project demonstrating state management and basic game logic.',
+    technologies: ['SwiftUI', 'Xcode', 'iOS Simulator'],
+    link: '#',
+    github: 'https://github.com/arnav-khandelwal/war-card-game',
+    features: [
+      'Tap the "Deal" button to draw random cards',
+      'Dynamic score updates based on the higher card',
+      'Custom card images and background assets',
+      'Lightweight SwiftUI-based UI with state management',
+      'Simple game logic using Int.random()'
+    ]
+  },
+  {
+    title: 'MediVerse',
+    description: 'An AI-powered tool that identifies medicines from damaged packaging images and provides safe usage information.',
+    fullDescription:
+      'MediVerse is a health-focused AI web app that identifies medicines from images of their damaged packages using image recognition. It integrates Gemini API for AI processing, Akash AI for chatbot functionality and also has a prescription analyzer. Built with React.js for the frontend and Express.js with Node.js for backend API handling.',
     technologies: ['React.js', 'Express.js', 'Gemini API', 'Akash AI', 'SCSS'],
     link: 'https://mediverse-jh0x.onrender.com/',
     github: 'https://github.com/arnav-khandelwal/mediverse',
@@ -66,35 +99,68 @@ const Projects = () => {
     ]
   },
   {
-    title: 'Mad Marketing Club Website & CRM',
-    description: 'A company website and CRM platform built to manage leads and streamline business operations.',
+    title: 'Jobr',
+    description: 'A swipe-based job discovery platform that fetches jobs via web scraping and applies automatically with AI-generated answers.',
     fullDescription:
-      'Developed the official Mad Marketing Club website with React.js, optimized for a 40% faster load speed using code splitting and lazy loading. Built a scalable CRM software as a sellable product, integrating authentication, lead tracking, and role-based access. Created a real-time analytics dashboard that reduced manual work by 70%.',
-    technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'SCSS'],
-    link: 'https://madmarketingclub.com/',
-    github: 'https://github.com/arnav-khandelwal/mad-marketing-club',
+      'Jobr is a modern job discovery app where users can explore job opportunities by simply swiping. The app fetches jobs using web scraping, filters them based on user preferences, and supports freelance gigs as well. When a user swipes right, the app automatically applies for the job using their uploaded resume and AI-generated answers for application questions. The frontend is built in Flutter for a smooth cross-platform experience, while the backend is powered by Node.js for scalable scraping, AI processing, and automated job applications.',
+    technologies: ['Flutter', 'Dart', 'Node.js', 'Express.js', 'Web Scraping', 'AI Integration'],
+    link: '#',
+    github: 'https://github.com/arnav-khandelwal/jobr',
     features: [
-      'Fully responsive company website',
-      'CRM with secure user authentication',
-      'Lead tracking and role-based access',
-      'Real-time analytics dashboard',
-      'Code-splitting for faster performance'
+      'Swipe-based job discovery with a Tinder-like UI',
+      'Automatic job applications with AI-generated answers',
+      'Job listings fetched dynamically via web scraping',
+      'Preference-based job filtering and freelance support',
+      'Cross-platform Flutter app with Node.js backend'
     ]
   },
   {
-    title: 'Personal Portfolio Website',
-    description: 'A responsive portfolio website showcasing creative animations, modern design principles, and optimized performance.',
+    title: 'SportsSocial App',
+    description: 'A cross-platform sports networking app for discovering events, hosting matches, and sharing achievements with the community.',
     fullDescription:
-      'A cutting-edge personal portfolio website designed to showcase projects and skills with modern UI/UX practices. Built with React.js and enhanced with GSAP animations for smooth transitions and interactive visuals. Styled with SCSS for modularity and optimized using Vite for blazing-fast performance.',
-    technologies: ['React.js', 'GSAP', 'SCSS', 'Vite'],
+      'SportsSocial is a Flutter-based mobile app that connects sports enthusiasts by enabling them to discover nearby events, join or host matches, and share their achievements with other players. The backend is built with Node.js and Express, featuring JWT authentication, real-time chat, and secure data management with Supabase. Push notifications keep users updated on upcoming events and new posts in their network.',
+    technologies: ['Flutter', 'Dart', 'Node.js', 'Express.js', 'Supabase'],
     link: '#',
-    github: 'https://github.com/arnav-khandelwal/portfolio',
+    github: 'https://github.com/rudradogra/sportsSocial_app',
     features: [
-      'Smooth GSAP animations for sections',
-      'Responsive design optimized for all devices',
-      'SEO-friendly and accessible',
-      'Lightweight and fast with Vite',
-      'Modern UI/UX principles'
+      'Cross-platform app for Android & iOS',
+      'Browse, join, and host sports events',
+      'Post and share achievements & match highlights',
+      'Real-time chat between participants',
+      'Push notifications for event reminders and updates'
+    ]
+  },
+  {
+    title: 'Algorithm Visualizer',
+    description: 'A comprehensive tool for visualizing algorithms and data structures with a React-based frontend and a C++ backend.',
+    fullDescription:
+      'Algorithm Visualizer is an interactive platform that helps users understand complex algorithms and data structures through visual animations. The frontend is built using React.js with Vite for fast performance, while the backend is implemented in C++ for efficient computation and served via a lightweight HTTP server. It supports sorting, searching, and graph algorithms, along with visualizations for common data structures like Binary Search Trees and Heaps.',
+    technologies: ['React.js', 'C++', 'CMake'],
+    link: '#',
+    github: 'https://github.com/arnav-khandelwal/algorithm-visualizer',
+    features: [
+      'Visualize sorting algorithms (Bubble, Merge, Quick, Heap, etc.)',
+      'Visualize searching algorithms (Linear, Binary)',
+      'Graph algorithm support: BFS, DFS, Dijkstra, Kruskal, Prim',
+      'Data structure visualizations like BST and Max Heap',
+      'Playback controls to step through algorithm execution',
+      'Frontend in React.js + Backend in C++ for performance'
+    ]
+  },
+  {
+    title: 'Delivery System Project',
+    description: 'A C++-based delivery system simulation with route planning, driver assignment, and order management, featuring a web-based interface.',
+    fullDescription:
+      'This Delivery System is a simulation platform that manages delivery routes, driver assignments, and order processing. It uses Dijkstra’s algorithm for shortest path calculations, a custom driver assignment algorithm based on workload, speed, and route compatibility, and route optimization for drivers with multiple deliveries. SQLite3 is used for storing locations, drivers, and orders, while the web-based interface allows easy management of the delivery network.',
+    technologies: ['C++', 'CMake', 'SQLite3', 'JavaScript', 'HTML/CSS'],
+    link: '#',
+    github: 'https://github.com/arnav-khandelwal/delivery-system',
+    features: [
+      'Shortest path calculation using Dijkstra’s algorithm with traffic factors',
+      'Driver assignment based on workload, speed, and route compatibility',
+      'Multi-order route optimization for efficient deliveries',
+      'Web-based interface for managing locations, roads, and orders',
+      'SQLite3 database integration for storing delivery network data'
     ]
   }
 ];
@@ -226,7 +292,31 @@ const Projects = () => {
                 style={{ cursor: 'pointer' }}
               >
                 <div className="projects__content">
-                  <h3 className="projects__item-title">{project.title}</h3>
+                  <div className="projects__header">
+                    <h3 className="projects__item-title">{project.title}</h3>
+                    <div className="projects__card-links">
+                      <a 
+                        href={project.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="projects__card-link"
+                        title="View GitHub Repository"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <SiGithub />
+                      </a>
+                      <a 
+                        href={project.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="projects__card-link"
+                        title="View Live Project"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <HiGlobeAlt />
+                      </a>
+                    </div>
+                  </div>
                   <p className="projects__description">{project.description}</p>
                   <div className="projects__technologies">
                     {project.technologies.map((tech, techIndex) => (

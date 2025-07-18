@@ -14,11 +14,8 @@ const Contact = () => {
   const formRef = useRef(null);
   const contactInfoRef = useRef(null);
   
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [result, setResult] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -78,29 +75,46 @@ const Contact = () => {
     );
   }, []);
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form submission logic here
-    console.log('Form submitted:', formData);
-    
-    // Reset form
-    setFormData({ name: '', email: '', message: '' });
-    
-    // Success animation
-    gsap.to(formRef.current, {
-      scale: 0.95,
-      duration: 0.1,
-      yoyo: true,
-      repeat: 1,
-      ease: "power2.inOut"
-    });
+    setIsSubmitting(true);
+    setResult('Sending...');
+
+    const formData = new FormData(e.target);
+    formData.append("access_key", "1f3d077d-cafe-4c92-afff-7606d4a88c80");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult('✅ Message sent successfully! I\'ll get back to you soon.');
+        e.target.reset();
+        
+        // Success animation
+        gsap.to(formRef.current, {
+          scale: 0.95,
+          duration: 0.1,
+          yoyo: true,
+          repeat: 1,
+          ease: "power2.inOut"
+        });
+      } else {
+        console.log("Error", data);
+        setResult('❌ ' + data.message);
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setResult('❌ Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+      // Clear result message after 5 seconds
+      setTimeout(() => setResult(''), 5000);
+    }
   };
 
   return (
@@ -114,8 +128,6 @@ const Contact = () => {
                 type="text"
                 name="name"
                 placeholder="Your Name"
-                value={formData.name}
-                onChange={handleInputChange}
                 required
                 className="contact__input"
               />
@@ -125,8 +137,6 @@ const Contact = () => {
                 type="email"
                 name="email"
                 placeholder="Your Email"
-                value={formData.email}
-                onChange={handleInputChange}
                 required
                 className="contact__input"
               />
@@ -135,17 +145,22 @@ const Contact = () => {
               <textarea
                 name="message"
                 placeholder="Your Message"
-                value={formData.message}
-                onChange={handleInputChange}
                 required
                 rows="5"
                 className="contact__textarea"
               ></textarea>
             </div>
-            <button type="submit" className="contact__submit">
-              Send Message
+            <button type="submit" className="contact__submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Sending...' : 'Send Message'}
               <span className="contact__submit-arrow">→</span>
             </button>
+            
+            {/* Status Message */}
+            {result && (
+              <div className={`contact__status ${result.includes('✅') ? 'contact__status--success' : 'contact__status--error'}`}>
+                {result}
+              </div>
+            )}
           </form>
           
           <div ref={contactInfoRef} className="contact__info">

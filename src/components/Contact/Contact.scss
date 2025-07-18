@@ -145,6 +145,39 @@
     transition: transform $transition-smooth;
   }
 
+  &__status {
+    margin-top: $spacing-md;
+    padding: $spacing-md;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    animation: slideIn 0.3s ease-out;
+
+    &--success {
+      background: rgba(76, 175, 80, 0.1);
+      color: #2e7d32;
+      border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+
+    &--error {
+      background: rgba(244, 67, 54, 0.1);
+      color: #c62828;
+      border: 1px solid rgba(244, 67, 54, 0.3);
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   &__info {
     display: flex;
     flex-direction: column;

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import { MdPerson, MdBolt, MdWork, MdEmail } from 'react-icons/md';
 import './DynamicIsland.scss';
 
 const DynamicIsland = () => {
@@ -9,10 +10,10 @@ const DynamicIsland = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const menuItems = [
-    { id: 'about', label: 'About', icon: '👤' },
-    { id: 'skills', label: 'Skills', icon: '⚡' },
-    { id: 'projects', label: 'Projects', icon: '💼' },
-    { id: 'contact', label: 'Contact', icon: '📧' }
+    { id: 'about', label: 'About', icon: MdPerson },
+    { id: 'skills', label: 'Skills', icon: MdBolt },
+    { id: 'projects', label: 'Projects', icon: MdWork },
+    { id: 'contact', label: 'Contact', icon: MdEmail }
   ];
 
   useEffect(() => {
@@ -307,7 +308,9 @@ const DynamicIsland = () => {
               onClick={() => handleNavClick(item.id)}
               aria-label={`Navigate to ${item.label}`}
             >
-              <span className="dynamic-island__icon">{item.icon}</span>
+              <span className="dynamic-island__icon">
+                <item.icon />
+              </span>
               <span className="dynamic-island__label">{item.label}</span>
             </button>
           </div>

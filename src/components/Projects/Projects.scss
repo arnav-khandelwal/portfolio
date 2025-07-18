@@ -237,6 +237,35 @@
       transform: translateX(2px);
     }
   }
+
+  &__view-controls {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-lg;
+    margin-top: $spacing-xl;
+  }
+
+  &__view-more-link,
+  &__view-less-link {
+    color: $accent-brown;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all $transition-smooth;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: darken($accent-brown, 10%);
+      text-decoration-color: $accent-brown;
+      transform: translateX(2px);
+    }
+  }
+
+  &__view-less-link:hover {
+    transform: translateX(-2px);
+  }
 }
 
 // Project Detail Modal Styles

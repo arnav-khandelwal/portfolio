@@ -14,6 +14,7 @@ const Projects = () => {
   const modalRef = useRef();
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [visibleProjects, setVisibleProjects] = useState(6); // Start with 6 projects (2 rows)
 
 const projects = [
   {
@@ -57,7 +58,7 @@ const projects = [
       'Travel AI is an AI assistant that helps users plan trips by integrating Gemini API, OpenWeatherMap, Booking.com, and SkyScanner. It reduces planning effort by 80% by automating hotel and flight suggestions, generating custom itineraries, and providing weather-based travel insights. The app is built with React.js and optimized for responsive, modular components.',
     technologies: ['React.js', 'Gemini API', 'OpenWeatherMap', 'SkyScanner API', 'CSS'],
     link: 'https://travelai-2tdl.onrender.com/',
-    github: 'https://github.com/arnav-khandelwal/travel-ai',
+    github: 'https://github.com/arnav-khandelwal/TravelAi',
     features: [
       'AI-driven itinerary generation',
       'Live hotel and flight search',
@@ -72,8 +73,7 @@ const projects = [
     fullDescription:
       'War Card Game is a fun, lightweight iOS app built using SwiftUI. Players and the computer deal random cards, and the score updates based on who draws the higher card. The game uses custom card assets and provides a clean, interactive interface. It’s a beginner-friendly SwiftUI project demonstrating state management and basic game logic.',
     technologies: ['SwiftUI', 'Xcode', 'iOS Simulator'],
-    link: '#',
-    github: 'https://github.com/arnav-khandelwal/war-card-game',
+    github: 'https://github.com/arnav-khandelwal/CardGame',
     features: [
       'Tap the "Deal" button to draw random cards',
       'Dynamic score updates based on the higher card',
@@ -89,7 +89,7 @@ const projects = [
       'MediVerse is a health-focused AI web app that identifies medicines from images of their damaged packages using image recognition. It integrates Gemini API for AI processing, Akash AI for chatbot functionality and also has a prescription analyzer. Built with React.js for the frontend and Express.js with Node.js for backend API handling.',
     technologies: ['React.js', 'Express.js', 'Gemini API', 'Akash AI', 'SCSS'],
     link: 'https://mediverse-jh0x.onrender.com/',
-    github: 'https://github.com/arnav-khandelwal/mediverse',
+    github: 'https://github.com/aryanj33/hack33/',
     features: [
       'Image recognition for medicine identification',
       'AI-powered chatbot for health queries',
@@ -104,7 +104,6 @@ const projects = [
     fullDescription:
       'Jobr is a modern job discovery app where users can explore job opportunities by simply swiping. The app fetches jobs using web scraping, filters them based on user preferences, and supports freelance gigs as well. When a user swipes right, the app automatically applies for the job using their uploaded resume and AI-generated answers for application questions. The frontend is built in Flutter for a smooth cross-platform experience, while the backend is powered by Node.js for scalable scraping, AI processing, and automated job applications.',
     technologies: ['Flutter', 'Dart', 'Node.js', 'Express.js', 'Web Scraping', 'AI Integration'],
-    link: '#',
     github: 'https://github.com/arnav-khandelwal/jobr',
     features: [
       'Swipe-based job discovery with a Tinder-like UI',
@@ -120,7 +119,6 @@ const projects = [
     fullDescription:
       'SportsSocial is a Flutter-based mobile app that connects sports enthusiasts by enabling them to discover nearby events, join or host matches, and share their achievements with other players. The backend is built with Node.js and Express, featuring JWT authentication, real-time chat, and secure data management with Supabase. Push notifications keep users updated on upcoming events and new posts in their network.',
     technologies: ['Flutter', 'Dart', 'Node.js', 'Express.js', 'Supabase'],
-    link: '#',
     github: 'https://github.com/rudradogra/sportsSocial_app',
     features: [
       'Cross-platform app for Android & iOS',
@@ -136,8 +134,7 @@ const projects = [
     fullDescription:
       'Algorithm Visualizer is an interactive platform that helps users understand complex algorithms and data structures through visual animations. The frontend is built using React.js with Vite for fast performance, while the backend is implemented in C++ for efficient computation and served via a lightweight HTTP server. It supports sorting, searching, and graph algorithms, along with visualizations for common data structures like Binary Search Trees and Heaps.',
     technologies: ['React.js', 'C++', 'CMake'],
-    link: '#',
-    github: 'https://github.com/arnav-khandelwal/algorithm-visualizer',
+    github: 'https://github.com/arnav-khandelwal/DSA_Visualizer',
     features: [
       'Visualize sorting algorithms (Bubble, Merge, Quick, Heap, etc.)',
       'Visualize searching algorithms (Linear, Binary)',
@@ -153,8 +150,7 @@ const projects = [
     fullDescription:
       'This Delivery System is a simulation platform that manages delivery routes, driver assignments, and order processing. It uses Dijkstra’s algorithm for shortest path calculations, a custom driver assignment algorithm based on workload, speed, and route compatibility, and route optimization for drivers with multiple deliveries. SQLite3 is used for storing locations, drivers, and orders, while the web-based interface allows easy management of the delivery network.',
     technologies: ['C++', 'CMake', 'SQLite3', 'JavaScript', 'HTML/CSS'],
-    link: '#',
-    github: 'https://github.com/arnav-khandelwal/delivery-system',
+    github: 'https://github.com/arnav-khandelwal/food-delivery-system',
     features: [
       'Shortest path calculation using Dijkstra’s algorithm with traffic factors',
       'Driver assignment based on workload, speed, and route compatibility',
@@ -164,6 +160,17 @@ const projects = [
     ]
   }
 ];
+
+  const loadMoreProjects = () => {
+    setVisibleProjects(prev => Math.min(prev + 6, projects.length)); // Load 6 more projects (2 rows)
+  };
+
+  const viewLessProjects = () => {
+    setVisibleProjects(6); // Reset to initial 6 projects
+  };
+
+  const hasMoreProjects = visibleProjects < projects.length;
+  const showingMoreThanInitial = visibleProjects > 6;
 
   const openProjectModal = (project) => {
     setSelectedProject(project);
@@ -234,7 +241,6 @@ const projects = [
   useEffect(() => {
     const section = sectionRef.current;
     const title = titleRef.current;
-    const projectItems = projectsRef.current.children;
 
     // Title animation
     gsap.fromTo(title,
@@ -253,24 +259,27 @@ const projects = [
       }
     );
 
-    // Projects staggered animation
-    gsap.fromTo(projectItems,
-      { y: 100, opacity: 0, rotation: 5 },
-      {
-        y: 0,
-        opacity: 1,
-        rotation: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: projectsRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play reverse play reverse"
+    // Initial projects animation
+    if (projectsRef.current) {
+      const initialItems = Array.from(projectsRef.current.children).slice(0, 6);
+      gsap.fromTo(initialItems,
+        { y: 100, opacity: 0, rotation: 5 },
+        {
+          y: 0,
+          opacity: 1,
+          rotation: 0,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: projectsRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play reverse play reverse"
+          }
         }
-      }
-    );
+      );
+    }
 
     // Cleanup on unmount
     return () => {
@@ -278,13 +287,35 @@ const projects = [
     };
   }, []);
 
+  // Animate new projects when they're loaded
+  useEffect(() => {
+    if (projectsRef.current && visibleProjects > 6) {
+      const allItems = projectsRef.current.children;
+      const newItems = Array.from(allItems).slice(visibleProjects - 6, visibleProjects);
+      
+      if (newItems.length > 0) {
+        gsap.fromTo(newItems,
+          { y: 100, opacity: 0, rotation: 5 },
+          {
+            y: 0,
+            opacity: 1,
+            rotation: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power2.out"
+          }
+        );
+      }
+    }
+  }, [visibleProjects]);
+
   return (
     <>
       <section id="projects" ref={sectionRef} className="projects">
         <div className="container">
           <h2 ref={titleRef} className="projects__title">Featured Projects</h2>
           <div ref={projectsRef} className="projects__grid">
-            {projects.map((project, index) => (
+            {projects.slice(0, visibleProjects).map((project, index) => (
               <div 
                 key={index} 
                 className="projects__item"
@@ -305,16 +336,18 @@ const projects = [
                       >
                         <SiGithub />
                       </a>
-                      <a 
-                        href={project.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="projects__card-link"
-                        title="View Live Project"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <HiGlobeAlt />
-                      </a>
+                      {project.link && (
+                        <a 
+                          href={project.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="projects__card-link"
+                          title="View Live Project"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <HiGlobeAlt />
+                        </a>
+                      )}
                     </div>
                   </div>
                   <p className="projects__description">{project.description}</p>
@@ -331,6 +364,25 @@ const projects = [
                 </div>
               </div>
             ))}
+          </div>
+          
+          <div className="projects__view-controls">
+            {hasMoreProjects && (
+              <span 
+                className="projects__view-more-link"
+                onClick={loadMoreProjects}
+              >
+                View More ↓
+              </span>
+            )}
+            {showingMoreThanInitial && (
+              <span 
+                className="projects__view-less-link"
+                onClick={viewLessProjects}
+              >
+                View Less ↑
+              </span>
+            )}
           </div>
         </div>
       </section>
@@ -361,16 +413,18 @@ const projects = [
                           <SiGithub />
                           <span>GitHub</span>
                         </a>
-                        <a 
-                          href={selectedProject.link} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="project-modal__link-btn"
-                          title="View Live Project"
-                        >
-                          <HiGlobeAlt />
-                          <span>Live Site</span>
-                        </a>
+                        {selectedProject.link && (
+                          <a 
+                            href={selectedProject.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="project-modal__link-btn"
+                            title="View Live Project"
+                          >
+                            <HiGlobeAlt />
+                            <span>Live Site</span>
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>

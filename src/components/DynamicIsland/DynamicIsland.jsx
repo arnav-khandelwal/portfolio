@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { MdPerson, MdBolt, MdWork, MdEmail } from 'react-icons/md';
+import { MdPerson, MdBolt, MdWork, MdEmail, MdHome } from 'react-icons/md';
 import './DynamicIsland.scss';
 
 const DynamicIsland = () => {
@@ -10,6 +10,7 @@ const DynamicIsland = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const menuItems = [
+    { id: 'home', label: 'Home', icon: MdHome },
     { id: 'about', label: 'About', icon: MdPerson },
     { id: 'skills', label: 'Skills', icon: MdBolt },
     { id: 'projects', label: 'Projects', icon: MdWork },
@@ -134,7 +135,7 @@ const DynamicIsland = () => {
         // Desktop: Animate island width expansion
         gsap.to(island, {
           width: "auto",
-          minWidth: "520px",
+          minWidth: "650px",
           duration: 1.0,
           ease: "power2.out",
           delay: 0.2
@@ -275,11 +276,17 @@ const DynamicIsland = () => {
   };
 
   const handleNavClick = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      toggleMenu(); // Close menu after navigation
+    if (sectionId === 'home') {
+      // Scroll to top of page for home
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Navigate to specific section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+    toggleMenu(); // Close menu after navigation
   };
 
   return (

@@ -18,6 +18,54 @@ const Projects = () => {
 
 const projects = [
   {
+    title: 'MediChain',
+    description: 'A secure, AI-powered healthcare platform with blockchain-backed prescription traceability.',
+    fullDescription:
+      'MediChain is a secure healthcare platform enabling patients, doctors, and pharmacies to issue, verify, and fulfill prescriptions with blockchain-backed traceability. It uses Solidity smart contracts for immutable verification and stores prescription payloads on IPFS with on-chain pointers. Real-time inventory and order fulfillment are powered by WebSockets (Socket.IO). An AI-powered prescription analyzer flags drug interactions and generates patient-friendly summaries. Role-based dashboards with JWT authentication and encrypted data flows provide secure access for patients, prescribers, and pharmacy admins.',
+    technologies: ['React.js', 'Express.js', 'Solidity', 'WebSockets', 'ethers.js', 'MongoDB', 'SCSS'],
+    link: 'https://medichain-chi.vercel.app/',
+    github: 'https://github.com/yash2607-del/medichain',
+    features: [
+      'On-chain digital signatures and immutable verification using Solidity smart contracts',
+      'Prescription data stored on IPFS with on-chain pointers to prevent tampering',
+      'Real-time pharmacy inventory & order fulfillment via WebSockets',
+      'AI-powered prescription analyzer to flag interactions and generate summaries',
+      'Role-based dashboards with JWT authentication and encrypted data flows',
+      'Tamper-proof verification and faster fulfillment with improved patient understanding'
+    ]
+  },
+  {
+    title: 'Jobr',
+    description: 'A swipe-based job discovery platform that fetches jobs via web scraping and applies using a Selenium based automation',
+    fullDescription:
+      'Jobr is a modern job discovery app where users can explore job opportunities by simply swiping. The app fetches jobs using web scraping, parses resume to extract relevant information, uses user data to suggest best jobs for him using GenAI. When a user swipes right, the app automatically applies for the job using their uploaded resume and AI-generated answers for application questions. The frontend is built in Flutter for a smooth cross-platform experience, while the backend is powered by Python for scalable scraping, AI processing, and automated job applications.',
+    technologies: ['Flutter', 'Dart', 'Python', 'FastAPI', 'Web Scraping', 'GenAI', 'Selenium'],
+    github: 'https://github.com/arnav-khandelwal/jobr',
+    features: [
+      'Swipe-based job discovery with a Tinder-like UI',
+      'Automatic job applications with AI-generated answers',
+      'Job listings fetched dynamically via web scraping',
+      'Resume parsing to extract user skills and experience',
+      'Cross-platform Flutter app with Python backend'
+    ]
+  },
+  {
+    title: 'Meteor Madness',
+    description: 'Planetary defense simulation platform for impact analysis, mission planning and interactive 3D visualization.',
+    fullDescription:
+      'Meteor Madness is a comprehensive planetary defense simulation system that integrates real-time NASA asteroid data, advanced physics-based impact modeling, and mission planning tools. It offers interactive 3D globe visualizations, detailed impact and damage assessments, deflection feasibility analysis (kinetic, nuclear, gravity tractor), and role-based reporting. The backend uses a high-performance FastAPI physics engine for orbital mechanics, atmospheric entry, airburst/crater modeling, and casualty estimates. Frontend uses React with Three.js/Globe visualization plus realtime features for scenario interaction.',
+    technologies: ['React.js', 'Three.js', 'Globe.gl', 'FastAPI', 'NumPy', 'Python', 'SCSS'],
+    github: 'https://github.com/Adithya-Venkatraman05/Meteor-Madness-AI-based-Meteor-defletion',
+    features: [
+      'NASA SBDB integration for real-time asteroid lookup and autocomplete',
+      'Accurate orbital mechanics and impact physics (airburst, crater, thermal, overpressure)',
+      'Interactive 3D globe with multi-zone damage visualization and population overlays',
+      'Deflection mission planning with energy & success probability estimates',
+      'High-performance physics engine validated against historical events (Chelyabinsk, Tunguska)',
+      'Batch processing and real-time scenario simulation with detailed API endpoints'
+    ]
+  },
+  {
     title: 'SportsSocial',
     description: 'A full-stack social platform to discover, join, and host events with real-time chat and location filtering.',
     fullDescription:
@@ -98,21 +146,7 @@ const projects = [
       'Responsive UI for mobile and desktop'
     ]
   },
-  {
-    title: 'Jobr',
-    description: 'A swipe-based job discovery platform that fetches jobs via web scraping and applies automatically with AI-generated answers.',
-    fullDescription:
-      'Jobr is a modern job discovery app where users can explore job opportunities by simply swiping. The app fetches jobs using web scraping, filters them based on user preferences, and supports freelance gigs as well. When a user swipes right, the app automatically applies for the job using their uploaded resume and AI-generated answers for application questions. The frontend is built in Flutter for a smooth cross-platform experience, while the backend is powered by Node.js for scalable scraping, AI processing, and automated job applications.',
-    technologies: ['Flutter', 'Dart', 'Node.js', 'Express.js', 'Web Scraping', 'AI Integration'],
-    github: 'https://github.com/arnav-khandelwal/jobr',
-    features: [
-      'Swipe-based job discovery with a Tinder-like UI',
-      'Automatic job applications with AI-generated answers',
-      'Job listings fetched dynamically via web scraping',
-      'Preference-based job filtering and freelance support',
-      'Cross-platform Flutter app with Node.js backend'
-    ]
-  },
+  
   {
     title: 'SportsSocial App',
     description: 'A cross-platform sports networking app for discovering events, hosting matches, and sharing achievements with the community.',

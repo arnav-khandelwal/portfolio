@@ -47,6 +47,27 @@ const AboutWidget = ({ onOpenExperienceModal }) => {
 ];
 
   const experienceData = [
+    {
+      year: 'Jan 2025 – Present',
+      title: 'Freelance Mobile App Developer',
+      company: 'Self Employed',
+      fullDescription:
+        'Developed, improved, and maintained two production-grade mobile apps and deployed them to the Google Play Store. Revamped the UI/UX of a social media platform (Local Vibez) collaborating with the founding team to enhance navigation, component structure, responsiveness, and overall usability. Engineered a subscription-based billing app for gold shops (BillMitr) implementing complex business logic including Razorpay payment integration, dynamic PDF/Excel generation, validation flows, and real-time error-resilient form handling.',
+      technologies: ['Flutter', 'Dart', 'Razorpay', 'Firebase', 'PDF/Excel Generation', 'Github', 'Provider'],
+      achievements: [
+        'Developed and deployed two production-grade mobile apps to the Google Play Store',
+        'Revamped UI/UX of Local Vibez resulting in improved user retention and engagement',
+        'Engineered BillMitr with subscription billing, dynamic PDF/Excel export and robust validation flows'
+      ],
+      responsibilities: [
+        'Design and implement mobile features end-to-end using Flutter',
+        'Collaborate with founders and stakeholders to improve UX and component architecture',
+        'Integrate payment gateways (Razorpay) and implement subscription billing logic',
+        'Implement dynamic PDF/Excel generation and resilient client-side validation and error handling'
+      ],
+      location: 'Remote',
+      type: 'Freelance'
+    },
   {
     year: 'June 2025 – Present',
     title: 'Flutter App Developer',

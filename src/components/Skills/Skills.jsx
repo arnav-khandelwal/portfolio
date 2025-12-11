@@ -14,7 +14,6 @@ import {
   SiMongodb,
   SiPostgresql,
   SiFirebase,
-  SiSwift,
 } from 'react-icons/si';
 import './Skills.scss';
 
@@ -28,7 +27,7 @@ const Skills = () => {
   const skills = [
   { name: 'React', level: 90, icon: SiReact, color: '#61DAFB' },        // Widely used frontend framework
   { name: 'Node.js', level: 85, icon: SiNodedotjs, color: '#339933' },  // Backend industry standard with JS
-  { name: 'Swift (Learning)', level: 50, icon: SiSwift, color: '#FA7343' }, // Niche, for iOS-specific dev
+  { name: 'React Native', level: 75, icon: SiReact, color: '#61DAFB' }, // Cross-platform mobile development
   { name: 'Flutter', level: 80, icon: SiFlutter, color: '#02569B' },    // Growing cross-platform mobile dev
   { name: 'Dart', level: 80, icon: SiDart, color: '#0175C2' },          // Needed for Flutter
   { name: 'MongoDB', level: 80, icon: SiMongodb, color: '#47A248' },    // Popular NoSQL database
